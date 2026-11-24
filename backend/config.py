@@ -5,6 +5,7 @@ load_dotenv()
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+WEBAPP_URL = os.getenv("WEBAPP_URL", "https://math-app-4tum.vercel.app")
 
 # Vercel serverless muhitida faqat /tmp papkasi yozish uchun ochiq
 if os.getenv("VERCEL"):
