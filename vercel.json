@@ -1,13 +1,8 @@
 {
-  "outputDirectory": "frontend",
-  "cleanUrls": true,
-  "headers": [
+  "rewrites": [
     {
       "source": "/(.*)",
-      "headers": [
-        { "key": "X-Frame-Options", "value": "ALLOWALL" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
-      ]
+      "destination": "/api/index.py"
     }
   ]
 }
