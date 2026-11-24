@@ -8,39 +8,49 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False} i
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
     telegram_id = Column(Integer, unique=True, index=True)
     name = Column(String, default="O'quvchi")
-    grade = Column(Integer, default=7) # 1 - 11 sinflar
+    grade = Column(Integer, default=7)
     coins = Column(Integer, default=100)
     streak = Column(Integer, default=1)
     xp = Column(Integer, default=0)
+    level = Column(Integer, default=1)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
 
 class Resource(Base):
     __tablename__ = "resources"
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, nullable=False)
-    category = Column(String, nullable=False) # 'textbook', 'formula', 'dtm', 'audio'
+    category = Column(String, nullable=False)  # formula, textbook, dtm, audio
     grade = Column(Integer, default=7)
-    subject = Column(String, default="Algebra") # Algebra, Geometriya, Matematika
-    file_url = Column(String, nullable=True)
-    content = Column(Text, nullable=True)
+    subject = Column(String, default="Algebra")
+    file_url = Column(String, nullable=True)       # Yuklab olinadigan fayl yo'li
+    file_name = Column(String, nullable=True)       # Original fayl nomi
+    content = Column(Text, nullable=True)           # Izoh yoki formula matni
+    is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
 
 class Problem(Base):
     __tablename__ = "problems"
     id = Column(Integer, primary_key=True, index=True)
     question_text = Column(Text, nullable=False)
     image_url = Column(String, nullable=True)
-    solution_steps_json = Column(Text, nullable=False) # JSON array of step titles & explanations
-    audio_script = Column(Text, nullable=True) # Text for TTS voice
+    solution_steps_json = Column(Text, nullable=False)
+    audio_script = Column(Text, nullable=True)
     grade = Column(Integer, default=7)
     subject = Column(String, default="Algebra")
     topic = Column(String, default="Tenglamalar")
+    difficulty = Column(Integer, default=1)         # 1-5 qiyinlik darajasi
+    source = Column(String, default="manual")       # manual, pdf_import, ai_generated
+    is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
 
 class Duel(Base):
     __tablename__ = "duels"
@@ -50,8 +60,9 @@ class Duel(Base):
     opponent_id = Column(Integer, nullable=True)
     creator_score = Column(Integer, default=0)
     opponent_score = Column(Integer, default=0)
-    status = Column(String, default="pending") # pending, active, completed
+    status = Column(String, default="pending")
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
 
 def init_db():
     Base.metadata.create_all(bind=engine)
