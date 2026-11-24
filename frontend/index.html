@@ -11,187 +11,123 @@
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
 
   <style>
-    /* ==================== 5 TA LUXURY RANG PALITRASI (@uiuxaadi uslubida) ==================== */
+    /* ==================== 5 TA LUXURY RANG PALITRASI (@uiuxaadi) ==================== */
     :root {
-      /* 1. Deep Blue Palette (Default - Image 1) */
+      /* 1. Deep Blue Palette (Default) */
       --bg-main: #000521;
       --bg-card: #020C47;
-      --bg-card-surface: rgba(2, 12, 71, 0.75);
-      --border-card: rgba(32, 120, 207, 0.35);
+      --bg-card-surface: rgba(2, 12, 71, 0.85);
+      --border-card: rgba(32, 120, 207, 0.45);
       --primary-color: #0E4EB2;
       --accent-color: #2078CF;
-      --accent-light: #60A5FA;
-      --spotlight-glow: rgba(32, 120, 207, 0.7);
+      --accent-light: #93C5FD;
+      --spotlight-glow: rgba(32, 120, 207, 0.75);
       --flare-color: #2078CF;
-      --header-bg: rgba(2, 12, 71, 0.9);
-      --text-highlight: #93C5FD;
+      --header-bg: rgba(2, 12, 71, 0.95);
+      --text-highlight: #BFDBFE;
+      --bubble-color: 32, 120, 207;
     }
 
     body.theme-indigo {
-      /* 2. Indigo Slate Palette (Image 2) */
+      /* 2. Indigo Slate Palette */
       --bg-main: #0B0F1A;
       --bg-card: #1E1B4B;
-      --bg-card-surface: rgba(30, 27, 75, 0.75);
-      --border-card: rgba(139, 124, 246, 0.35);
+      --bg-card-surface: rgba(30, 27, 75, 0.85);
+      --border-card: rgba(139, 124, 246, 0.45);
       --primary-color: #5046E5;
       --accent-color: #8B7CF6;
       --accent-light: #C7C1FF;
-      --spotlight-glow: rgba(139, 124, 246, 0.7);
+      --spotlight-glow: rgba(139, 124, 246, 0.75);
       --flare-color: #8B7CF6;
-      --header-bg: rgba(30, 27, 75, 0.9);
-      --text-highlight: #C7C1FF;
+      --header-bg: rgba(30, 27, 75, 0.95);
+      --text-highlight: #DDD6FE;
+      --bubble-color: 139, 124, 246;
     }
 
     body.theme-berry {
-      /* 3. Berry Crimson Palette (Image 3) */
+      /* 3. Berry Crimson Palette */
       --bg-main: #2D0A1E;
       --bg-card: #45122F;
-      --bg-card-surface: rgba(69, 18, 47, 0.75);
-      --border-card: rgba(233, 125, 166, 0.35);
+      --bg-card-surface: rgba(69, 18, 47, 0.85);
+      --border-card: rgba(233, 125, 166, 0.45);
       --primary-color: #6A1E3B;
       --accent-color: #B94273;
       --accent-light: #FFC9B9;
-      --spotlight-glow: rgba(233, 125, 166, 0.7);
+      --spotlight-glow: rgba(233, 125, 166, 0.75);
       --flare-color: #E97DA6;
-      --header-bg: rgba(45, 10, 30, 0.9);
-      --text-highlight: #FFC9B9;
+      --header-bg: rgba(45, 10, 30, 0.95);
+      --text-highlight: #FBCFE8;
+      --bubble-color: 233, 125, 166;
     }
 
     body.theme-emerald {
-      /* 4. Deep Emerald Forest Palette (Image 4) */
+      /* 4. Deep Emerald Forest */
       --bg-main: #0F2A1D;
       --bg-card: #163B29;
-      --bg-card-surface: rgba(22, 59, 41, 0.75);
-      --border-card: rgba(107, 144, 113, 0.35);
+      --bg-card-surface: rgba(22, 59, 41, 0.85);
+      --border-card: rgba(107, 144, 113, 0.45);
       --primary-color: #375534;
       --accent-color: #6B9071;
       --accent-light: #E3EED4;
-      --spotlight-glow: rgba(107, 144, 113, 0.7);
+      --spotlight-glow: rgba(107, 144, 113, 0.75);
       --flare-color: #6B9071;
-      --header-bg: rgba(15, 42, 29, 0.9);
-      --text-highlight: #AEC3B0;
+      --header-bg: rgba(15, 42, 29, 0.95);
+      --text-highlight: #BBF7D0;
+      --bubble-color: 107, 144, 113;
     }
 
     body.theme-violet {
-      /* 5. Cyberpunk Violet / Magenta Palette (Image 5) */
+      /* 5. Cyberpunk Violet */
       --bg-main: #00010D;
       --bg-card: #010326;
-      --bg-card-surface: rgba(45, 1, 64, 0.7);
-      --border-card: rgba(163, 5, 166, 0.35);
+      --bg-card-surface: rgba(45, 1, 64, 0.8);
+      --border-card: rgba(163, 5, 166, 0.45);
       --primary-color: #660273;
       --accent-color: #A305A6;
       --accent-light: #F0ABFC;
-      --spotlight-glow: rgba(163, 5, 166, 0.7);
+      --spotlight-glow: rgba(163, 5, 166, 0.75);
       --flare-color: #A305A6;
-      --header-bg: rgba(1, 3, 38, 0.9);
+      --header-bg: rgba(1, 3, 38, 0.95);
       --text-highlight: #F5D0FE;
+      --bubble-color: 163, 5, 166;
     }
 
-    /* Asosiy Fon */
     body {
       background-color: var(--bg-main) !important;
       transition: background-color 0.4s ease, color 0.4s ease;
     }
 
-    /* ==================== SPOTLIGHT VA LENS FLARE EFFEKTLARI (Aynan rasmdagidek) ==================== */
+    /* Jonli Canvas Animatsiyasi uchun */
+    #bgAnimationCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Yon Spotlight va Lens Flare nurlari */
     .spotlight-lens {
       position: fixed;
       pointer-events: none;
-      z-index: 0;
+      z-index: 2;
     }
-    
-    /* Chap yuqori yorug'lik */
-    .spotlight-lt {
-      top: 14%;
-      left: -60px;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: var(--spotlight-glow);
-      filter: blur(65px);
-    }
-    .flare-lt {
-      top: 17%;
-      left: -4px;
-      width: 8px;
-      height: 36px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      box-shadow: 0 0 25px 8px var(--flare-color);
-      opacity: 0.95;
-    }
+    .spotlight-lt { top: 12%; left: -60px; width: 170px; height: 170px; border-radius: 50%; background: var(--spotlight-glow); filter: blur(60px); }
+    .flare-lt { top: 15%; left: -3px; width: 6px; height: 32px; border-radius: 50%; background: #FFF; box-shadow: 0 0 25px 8px var(--flare-color); opacity: 0.95; }
+    .spotlight-lb { bottom: 20%; left: -60px; width: 170px; height: 170px; border-radius: 50%; background: var(--spotlight-glow); filter: blur(60px); }
+    .flare-lb { bottom: 23%; left: -3px; width: 6px; height: 32px; border-radius: 50%; background: #FFF; box-shadow: 0 0 25px 8px var(--flare-color); opacity: 0.95; }
+    .spotlight-rt { top: 12%; right: -60px; width: 170px; height: 170px; border-radius: 50%; background: var(--spotlight-glow); filter: blur(60px); }
+    .flare-rt { top: 15%; right: -3px; width: 6px; height: 32px; border-radius: 50%; background: #FFF; box-shadow: 0 0 25px 8px var(--flare-color); opacity: 0.95; }
+    .spotlight-rb { bottom: 20%; right: -60px; width: 170px; height: 170px; border-radius: 50%; background: var(--spotlight-glow); filter: blur(60px); }
+    .flare-rb { bottom: 23%; right: -3px; width: 6px; height: 32px; border-radius: 50%; background: #FFF; box-shadow: 0 0 25px 8px var(--flare-color); opacity: 0.95; }
 
-    /* Chap pastki yorug'lik */
-    .spotlight-lb {
-      bottom: 22%;
-      left: -60px;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: var(--spotlight-glow);
-      filter: blur(65px);
-    }
-    .flare-lb {
-      bottom: 25%;
-      left: -4px;
-      width: 8px;
-      height: 36px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      box-shadow: 0 0 25px 8px var(--flare-color);
-      opacity: 0.95;
-    }
-
-    /* O'ng yuqori yorug'lik */
-    .spotlight-rt {
-      top: 14%;
-      right: -60px;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: var(--spotlight-glow);
-      filter: blur(65px);
-    }
-    .flare-rt {
-      top: 17%;
-      right: -4px;
-      width: 8px;
-      height: 36px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      box-shadow: 0 0 25px 8px var(--flare-color);
-      opacity: 0.95;
-    }
-
-    /* O'ng pastki yorug'lik */
-    .spotlight-rb {
-      bottom: 22%;
-      right: -60px;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: var(--spotlight-glow);
-      filter: blur(65px);
-    }
-    .flare-rb {
-      bottom: 25%;
-      right: -4px;
-      width: 8px;
-      height: 36px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      box-shadow: 0 0 25px 8px var(--flare-color);
-      opacity: 0.95;
-    }
-
-    /* Radar animatsiyasi (Barat Academy Random Matchmaker uchun) */
     @keyframes radarSweep {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    .radar-sweep {
-      animation: radarSweep 2.2s linear infinite;
-    }
+    .radar-sweep { animation: radarSweep 2.2s linear infinite; }
 
     @keyframes waveBar {
       0%, 100% { height: 4px; }
@@ -204,91 +140,79 @@
     .wave-bar:nth-child(5) { animation-delay: 0.2s; }
     .wave-bar:nth-child(6) { animation-delay: 0.35s; }
 
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 16px var(--spotlight-glow); }
-      50% { box-shadow: 0 0 32px var(--spotlight-glow); }
-    }
-    .theme-neon-glow {
-      animation: pulse-glow 3s infinite ease-in-out;
-    }
-
     .chalk-board {
-      background: linear-gradient(145deg, #0d1e17 0%, #05110a 100%);
-      box-shadow: inset 0 0 30px rgba(0,0,0,0.85), 0 10px 25px -5px rgba(0,0,0,0.6);
+      background: linear-gradient(145deg, #091a13 0%, #030d07 100%);
+      box-shadow: inset 0 0 35px rgba(0,0,0,0.9), 0 10px 25px -5px rgba(0,0,0,0.6);
     }
     
     ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-thumb { background: var(--border-card); border-radius: 4px; }
 
-    /* Palitra tabletka kartalari */
     .palette-pill {
       box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
       border-radius: 1.5rem;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .palette-pill:hover {
-      transform: translateY(-2px);
-    }
   </style>
 </head>
 <body class="text-slate-100 antialiased p-0 m-0 font-sans select-none min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
+  <!-- ==================== JONLI FON ANIMATSIYASI (SUZUVCHI PUFAKCHALAR & NUR ZARRACHALARI) ==================== -->
+  <canvas id="bgAnimationCanvas"></canvas>
+
   <!-- ==================== YON SPOTLIGHT VA FLARE EFFEKTLARI (@uiuxaadi) ==================== -->
   <div class="spotlight-lens spotlight-lt"></div>
   <div class="spotlight-lens flare-lt"></div>
-
   <div class="spotlight-lens spotlight-lb"></div>
   <div class="spotlight-lens flare-lb"></div>
-
   <div class="spotlight-lens spotlight-rt"></div>
   <div class="spotlight-lens flare-rt"></div>
-
   <div class="spotlight-lens spotlight-rb"></div>
   <div class="spotlight-lens flare-rb"></div>
 
-  <!-- ==================== MINI APP HEADER ==================== -->
-  <header style="background-color: var(--header-bg); border-color: var(--border-card);" class="sticky top-0 z-40 backdrop-blur-xl border-b px-4 py-2.5 transition-colors">
+  <!-- ==================== MINI APP HEADER (TOZA VA IXCHAM) ==================== -->
+  <header style="background-color: var(--header-bg); border-color: var(--border-card);" class="sticky top-0 z-40 backdrop-blur-xl border-b px-3.5 py-2.5 transition-colors">
     <div class="flex items-center justify-between relative z-10">
       
-      <!-- Profil kartasi (bosilganda tahrirlash oynasi ochiladi) -->
+      <!-- Profil kartasi (Dumaloq rasm va ism) -->
       <div onclick="openProfileModal()" class="flex items-center gap-2.5 cursor-pointer hover:opacity-90 active:scale-95 transition-all" title="Profilni tahrirlash">
         <div class="relative">
-          <div id="userAvatarContainer" style="box-shadow: 0 0 15px var(--spotlight-glow);" class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center text-white font-extrabold text-lg overflow-hidden border border-white/20">
+          <div id="userAvatarContainer" style="box-shadow: 0 0 14px var(--spotlight-glow);" class="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center text-white font-extrabold text-base overflow-hidden border-2 border-white/40">
             <span id="userAvatarEmoji">🎓</span>
             <img id="userAvatarImg" src="" alt="Avatar" class="w-full h-full object-cover hidden">
           </div>
-          <span id="userGradeBadge" class="absolute -bottom-1 -right-1 bg-emerald-500 text-[9px] text-black font-extrabold px-1.5 py-0.2 rounded-md border border-black shadow">7-S</span>
+          <span id="userGradeBadge" class="absolute -bottom-0.5 -right-0.5 bg-emerald-500 text-[8px] text-black font-black px-1 rounded-md border border-black shadow">7-S</span>
         </div>
         <div>
           <div class="flex items-center gap-1.5">
-            <h1 class="text-xs font-bold text-white tracking-wide flex items-center gap-1">
-              <span id="userName">O'quvchi</span>
-              <span class="text-[10px] text-indigo-300">✏️</span>
+            <h1 class="text-xs sm:text-sm font-extrabold text-white tracking-wide flex items-center gap-1">
+              <span id="userName">Azizbek</span>
+              <span class="text-[10px] text-blue-300">✏️</span>
             </h1>
-            <span id="userLevelBadge" style="background: var(--bg-card-surface); border-color: var(--border-card); color: var(--text-highlight);" class="text-[9px] px-1.5 py-0.5 rounded-full font-bold border">O'rta</span>
+            <span id="userLevelBadge" style="background: var(--bg-card-surface); border-color: var(--border-card); color: var(--text-highlight);" class="text-[9px] px-1.5 py-0.2 rounded-full font-bold border">O'rta</span>
           </div>
-          <div class="flex items-center gap-1 text-[10px] text-slate-400">
+          <div class="text-[10px] text-slate-300 font-medium">
             <span id="userSchoolDisplay">7-sinf • Maktab</span>
           </div>
         </div>
       </div>
 
-      <!-- Header O'ng qism: 5 Rangli Palitra Tanlagich + Streak & Coins -->
+      <!-- Header O'ng qism: Mavzu Tanlagich (Barcha palitralar shu tugmada!) + Streak + Coins -->
       <div class="flex items-center gap-1.5">
         
-        <!-- 5 Rangli Palitra Menyusi (Modal chaqiradi) -->
-        <button onclick="openThemePickerModal()" style="border-color: var(--border-card);" class="px-2 py-1 rounded-xl bg-white/5 hover:bg-white/10 border flex items-center gap-1 text-xs transition-all active:scale-95" title="Rang palitrasini tanlash">
-          <span class="w-2.5 h-2.5 rounded-full" style="background: var(--accent-color);"></span>
-          <span class="text-[10px] font-bold text-slate-300">Mavzu</span>
+        <!-- Barcha 5 rangli palitra bir tugmaga jamlangan -->
+        <button onclick="openThemePickerModal()" style="border-color: var(--border-card); background: var(--bg-card-surface);" class="px-2.5 py-1.5 rounded-xl border flex items-center gap-1.5 text-xs transition-all active:scale-95 shadow-sm" title="Rang palitrasi va dizayn">
+          <span class="w-2.5 h-2.5 rounded-full shadow" style="background: var(--accent-color);"></span>
+          <span class="text-[11px] font-bold text-white">Mavzu</span>
         </button>
 
-        <!-- Streaks (Noldan hisoblanadi) -->
-        <div class="flex items-center gap-1 bg-gradient-to-r from-orange-500/15 to-amber-500/15 text-amber-400 px-2 py-1 rounded-xl font-bold border border-amber-500/20 text-xs" title="Ketma-ket faollik">
+        <!-- Streaks (Telefonda ixcham va toza joylashgan) -->
+        <div class="flex items-center gap-1 bg-gradient-to-r from-orange-500/20 to-amber-500/20 text-amber-300 px-2.5 py-1.5 rounded-xl font-black border border-amber-500/30 text-xs shadow-sm">
           <span>🔥</span> <span id="streakCount">1-kun</span>
         </div>
 
-        <!-- Coins (Noldan hisoblanadi) -->
-        <div style="background: var(--bg-card-surface); border-color: var(--border-card); color: var(--text-highlight);" class="flex items-center gap-1 px-2.5 py-1 rounded-xl font-bold border text-xs" title="Jamg'arilgan tangalar">
+        <!-- Coins -->
+        <div style="background: var(--bg-card-surface); border-color: var(--border-card); color: var(--text-highlight);" class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl font-black border text-xs shadow-sm">
           <span>🪙</span> <span id="coinsCount">0</span>
         </div>
 
@@ -296,113 +220,100 @@
     </div>
   </header>
 
-  <!-- ==================== 5 RANG PALITRASI TEZKOR TANLAGICH LENTASI ==================== -->
-  <div style="background-color: rgba(0,0,0,0.3); border-color: var(--border-card);" class="border-b px-4 py-1.5 flex items-center justify-between text-[10px] relative z-10 backdrop-blur-md">
-    <span class="text-slate-400 font-medium flex items-center gap-1">
-      <span>🎨</span> Palitrani tanlang:
-    </span>
-    <div class="flex items-center gap-2">
-      <!-- 1. Deep Blue (#2078CF) -->
-      <button onclick="setThemePalette('theme-blue')" class="w-5 h-5 rounded-full bg-[#2078CF] border-2 border-white/50 hover:scale-110 active:scale-95 transition-all shadow-md" title="Kobalt Ko'k (#2078CF)"></button>
-      <!-- 2. Indigo Slate (#5046E5) -->
-      <button onclick="setThemePalette('theme-indigo')" class="w-5 h-5 rounded-full bg-[#5046E5] border-2 border-white/20 hover:scale-110 active:scale-95 transition-all shadow-md" title="Indigo & Siyohrang (#5046E5)"></button>
-      <!-- 3. Berry Crimson (#B94273) -->
-      <button onclick="setThemePalette('theme-berry')" class="w-5 h-5 rounded-full bg-[#B94273] border-2 border-white/20 hover:scale-110 active:scale-95 transition-all shadow-md" title="Qirmizi Yoqut (#B94273)"></button>
-      <!-- 4. Emerald Forest (#6B9071) -->
-      <button onclick="setThemePalette('theme-emerald')" class="w-5 h-5 rounded-full bg-[#6B9071] border-2 border-white/20 hover:scale-110 active:scale-95 transition-all shadow-md" title="Zumrad Yashil (#6B9071)"></button>
-      <!-- 5. Cyberpunk Violet (#A305A6) -->
-      <button onclick="setThemePalette('theme-violet')" class="w-5 h-5 rounded-full bg-[#A305A6] border-2 border-white/20 hover:scale-110 active:scale-95 transition-all shadow-md" title="Neon Fiolet (#A305A6)"></button>
-    </div>
-  </div>
-
   <!-- ==================== ASOSIY KONTENT HUDUDI ==================== -->
-  <main class="flex-1 max-w-md mx-auto w-full p-4 space-y-4 relative z-10">
+  <main class="flex-1 max-w-md mx-auto w-full p-3.5 space-y-4 relative z-10">
 
     <!-- 1. TAB: SKANER & DOSKA -->
     <section id="content-tutor" class="space-y-3.5">
       
-      <!-- Skaner Harakat Kartasi (Pill capsule card style) -->
-      <div style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill relative overflow-hidden p-4 border backdrop-blur-xl theme-neon-glow space-y-2.5">
-        <div class="flex items-center justify-between mb-1">
-          <span style="color: var(--text-highlight);" class="text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5">
+      <!-- Skaner Harakat Kartasi (Kattaroq, aniq va qulay) -->
+      <div style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill relative overflow-hidden p-4 border backdrop-blur-xl space-y-2.5">
+        <div class="flex items-center justify-between">
+          <span style="color: var(--text-highlight);" class="text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full animate-ping" style="background: var(--accent-color);"></span> AI Foto-Tyutor
           </span>
-          <span style="background: rgba(255,255,255,0.08); border-color: var(--border-card); color: var(--text-highlight);" class="text-[10px] px-2.5 py-0.5 rounded-full border font-semibold">Tezkor Tahlil</span>
+          <span style="background: rgba(255,255,255,0.1); border-color: var(--border-card); color: var(--text-highlight);" class="text-[10px] px-2.5 py-0.5 rounded-full border font-bold">Avtomatik Tahlil</span>
         </div>
 
-        <p class="text-xs text-slate-300">Daftaringizdagi masalani rasmga oling yoki galereyadan yuklang — AI darhol yechadi:</p>
+        <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">
+          Daftaringizdagi masalani kameraga oling yoki galereyadan yuklang — AI darhol yechadi:
+        </p>
 
-        <!-- Yashirin File Inputlar (Kamera va Galereya) -->
+        <!-- Yashirin File Inputlar -->
+        <!-- 1. Kamera: capture="environment" bilan to'g'ridan-to'g'ri telefon kamerasini ochadi -->
         <input type="file" id="cameraUpload" accept="image/*" capture="environment" class="hidden" onchange="handleImageFile(this)">
+        <!-- 2. Galereya: rasmlar to'plamidan tanlash -->
         <input type="file" id="galleryUpload" accept="image/*" class="hidden" onchange="handleImageFile(this)">
 
         <div class="flex gap-2.5 pt-1">
-          <button onclick="document.getElementById('cameraUpload').click()" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" class="flex-1 py-3 px-3 rounded-2xl text-white font-extrabold text-xs shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all">
+          <!-- Daftarni skanerlash: Avtomatik telefon kamerasini yoqadi -->
+          <button onclick="document.getElementById('cameraUpload').click()" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" class="flex-1 py-3 px-3 rounded-2xl text-white font-black text-xs shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all">
             <span class="text-base">📸</span> Daftarni Skanerlash
           </button>
-          <button onclick="document.getElementById('galleryUpload').click()" class="py-3 px-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-slate-100 border border-white/15 text-xs font-semibold flex items-center gap-1.5 active:scale-95 transition-all">
+          <!-- Galereyadan tanlash -->
+          <button onclick="document.getElementById('galleryUpload').click()" class="py-3 px-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-bold flex items-center gap-1.5 active:scale-95 transition-all">
             <span>🖼️</span> Galereya
           </button>
         </div>
       </div>
 
-      <!-- Yuklangan rasm preview (rasm tanlanganda darhol ko'rsatiladi) -->
-      <div id="imagePreviewContainer" style="background: rgba(0,0,0,0.6); border-color: var(--border-card);" class="hidden rounded-2xl border p-2.5 flex items-center justify-between backdrop-blur-md">
+      <!-- Yuklangan rasm preview (rasm olinishi bilanoq ko'rsatiladi) -->
+      <div id="imagePreviewContainer" style="background: rgba(0,0,0,0.7); border-color: var(--border-card);" class="hidden rounded-2xl border p-2.5 flex items-center justify-between backdrop-blur-md">
         <div class="flex items-center gap-2.5 overflow-hidden">
           <img id="imagePreview" src="" alt="Daftar rasmi" class="w-12 h-12 object-cover rounded-xl border border-white/20">
           <div>
-            <div class="text-xs font-bold text-white">Tanlangan rasm</div>
-            <div id="imageStatusText" class="text-[10px] text-amber-300 animate-pulse">⏳ AI tahlil qilmoqda...</div>
+            <div class="text-xs font-bold text-white">Skanerlangan rasm</div>
+            <div id="imageStatusText" class="text-[11px] text-amber-300 font-bold animate-pulse">⏳ AI daftarni tahlil qilmoqda...</div>
           </div>
         </div>
-        <button onclick="clearUploadedImage()" class="text-xs text-slate-400 hover:text-rose-400 px-2 py-1">✕ Bekor</button>
+        <button onclick="clearUploadedImage()" class="text-xs text-slate-400 hover:text-rose-400 font-bold px-2 py-1">✕ Bekor</button>
       </div>
 
-      <!-- Qora Doska (Blackboard) -->
-      <div class="chalk-board rounded-3xl p-4 border border-emerald-500/30 space-y-3">
+      <!-- Qora Doska (Blackboard) - Yirik va aniq shriftlar bilan -->
+      <div class="chalk-board rounded-3xl p-4 sm:p-5 border border-emerald-500/35 space-y-3.5">
         
         <!-- Doska Header va Masalani O'zgartirish Tugmasi -->
-        <div class="flex items-center justify-between pb-2 border-b border-emerald-500/20 text-xs">
+        <div class="flex items-center justify-between pb-2 border-b border-emerald-500/25 text-xs">
           <div class="flex items-center gap-1.5">
-            <span class="text-base">📐</span>
-            <span id="boardSubjectText" class="text-emerald-300 font-bold font-mono">Algebra • 7-Sinf Masalasi</span>
+            <span class="text-lg">📐</span>
+            <span id="boardSubjectText" class="text-emerald-300 font-bold font-mono text-xs sm:text-sm">Algebra • 7-Sinf Masalasi</span>
           </div>
-          <button onclick="openEditProblemModal()" class="px-2.5 py-1 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold flex items-center gap-1 transition-all">
+          <button onclick="openEditProblemModal()" class="px-2.5 py-1 rounded-lg bg-emerald-950/90 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 text-[11px] font-bold flex items-center gap-1 transition-all">
             <span>✏️</span> O'zgartirish
           </button>
         </div>
 
-        <!-- Masala Matni / Formula -->
-        <div id="equationTitle" class="text-emerald-100 font-extrabold text-base font-mono tracking-wide">
+        <!-- Masala Matni / Formula (Yirik va aniq font) -->
+        <div id="equationTitle" class="text-emerald-100 font-black text-lg sm:text-xl font-mono tracking-wide py-0.5">
           3(2x - 5) + 7 = 28
         </div>
 
         <!-- Yechim Bosqichlari (Accordions) -->
-        <div id="solutionStepsContainer" class="space-y-2 text-xs font-mono">
+        <div id="solutionStepsContainer" class="space-y-2 text-xs sm:text-sm font-mono">
           
-          <div class="rounded-xl bg-black/50 border border-emerald-500/20 overflow-hidden">
-            <button onclick="toggleAccordion('step1-body', 'step1-arrow')" class="w-full p-2.5 flex items-center justify-between text-left hover:bg-emerald-950/30">
+          <div class="rounded-xl bg-black/60 border border-emerald-500/25 overflow-hidden">
+            <button onclick="toggleAccordion('step1-body', 'step1-arrow')" class="w-full p-2.5 sm:p-3 flex items-center justify-between text-left hover:bg-emerald-950/40">
               <span id="step1-title" class="text-emerald-300 font-bold flex items-center gap-1.5">
                 <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] flex items-center justify-center font-bold">1</span>
                 Qavsni ochish va sonlarni guruhlash
               </span>
               <span id="step1-arrow" class="text-emerald-400 text-xs">▼</span>
             </button>
-            <div id="step1-body" class="p-2.5 pt-0 text-[11px] text-emerald-200/90 border-t border-emerald-500/10 space-y-1">
+            <div id="step1-body" class="p-3 pt-0 text-xs sm:text-sm text-emerald-200/90 border-t border-emerald-500/15 space-y-1">
               <div id="step1-detail">3 ni har bir hadga ko'paytiramiz: 3·2x - 3·5 + 7 = 28</div>
               <div class="text-yellow-300 font-bold pl-2" id="step1-formula">➔ 6x - 15 + 7 = 28 ➔ 6x - 8 = 28</div>
             </div>
           </div>
 
-          <div class="rounded-xl bg-black/50 border border-emerald-500/20 overflow-hidden">
-            <button onclick="toggleAccordion('step2-body', 'step2-arrow')" class="w-full p-2.5 flex items-center justify-between text-left hover:bg-emerald-950/30">
+          <div class="rounded-xl bg-black/60 border border-emerald-500/25 overflow-hidden">
+            <button onclick="toggleAccordion('step2-body', 'step2-arrow')" class="w-full p-2.5 sm:p-3 flex items-center justify-between text-left hover:bg-emerald-950/40">
               <span id="step2-title" class="text-emerald-300 font-bold flex items-center gap-1.5">
                 <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] flex items-center justify-center font-bold">2</span>
                 Noma'lum x ning qiymatini topish
               </span>
               <span id="step2-arrow" class="text-emerald-400 text-xs">▼</span>
             </button>
-            <div id="step2-body" class="p-2.5 pt-0 text-[11px] text-emerald-200/90 border-t border-emerald-500/10 space-y-1">
+            <div id="step2-body" class="p-3 pt-0 text-xs sm:text-sm text-emerald-200/90 border-t border-emerald-500/15 space-y-1">
               <div id="step2-detail">-8 ni o'ngga musbat qilib o'tkazamiz: 6x = 28 + 8 = 36</div>
               <div class="text-yellow-300 font-bold pl-2" id="step2-formula">➔ x = 36 ÷ 6 👉 [ x = 6 ] 🎉</div>
             </div>
@@ -411,14 +322,14 @@
         </div>
 
         <!-- Audio Pleer -->
-        <div class="bg-black/60 rounded-2xl p-3 border border-emerald-500/30 flex items-center justify-between">
+        <div class="bg-black/70 rounded-2xl p-3 border border-emerald-500/35 flex items-center justify-between">
           <div class="flex items-center gap-2.5">
-            <button onclick="toggleAudio()" id="voicePlayBtn" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-400 to-teal-500 text-black font-extrabold flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all">
+            <button onclick="toggleAudio()" id="voicePlayBtn" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-400 to-teal-500 text-black font-black flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all text-base">
               ▶
             </button>
             <div>
-              <div class="text-xs font-bold text-emerald-200">AI Ovozli Repetitor</div>
-              <div class="text-[10px] text-emerald-400/70" id="voiceStatus">Tinglash uchun bosing</div>
+              <div class="text-xs sm:text-sm font-bold text-emerald-200">AI Ovozli Repetitor</div>
+              <div class="text-[10px] sm:text-[11px] text-emerald-400/80 font-medium" id="voiceStatus">Tinglash uchun bosing</div>
             </div>
           </div>
           <div id="equalizer" class="flex items-center gap-1 h-6 px-2 opacity-40">
@@ -433,12 +344,81 @@
 
         <!-- Pastki Tugmalar -->
         <div class="grid grid-cols-2 gap-2 pt-1">
-          <button onclick="openChatWithQuestion('Bu masalada birinchi qadamni tushunmadim, soddaroq tushuntir')" class="py-2.5 rounded-xl bg-emerald-900/50 hover:bg-emerald-900/80 border border-emerald-500/30 text-emerald-200 text-xs font-semibold flex items-center justify-center gap-1 active:scale-95 transition-all">
+          <button onclick="openChatWithQuestion('Bu masalada birinchi qadamni tushunmadim, soddaroq tushuntir')" class="py-2.5 rounded-xl bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-200 text-xs font-bold flex items-center justify-center gap-1 active:scale-95 transition-all">
             <span>❓</span> "Nega bunday?"
           </button>
-          <button onclick="generateSimilarProblem()" class="py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black text-xs font-extrabold flex items-center justify-center gap-1 active:scale-95 transition-all shadow-md">
+          <button onclick="generateSimilarProblem()" class="py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black text-xs font-black flex items-center justify-center gap-1 active:scale-95 transition-all shadow-md">
             <span>⚡</span> O'xshashini yech (+15🪙)
           </button>
+        </div>
+      </div>
+
+      <!-- ==================== KUNLIK STATISTIKA & TOP REYTING ==================== -->
+      <div style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-4 border backdrop-blur-xl space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs sm:text-sm font-black text-white flex items-center gap-1.5">
+            <span>🏆</span> Kunlik Peshqadamlar (Top O'quvchilar)
+          </h3>
+          <span class="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-500/30">BUGUN</span>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <!-- 1-o'rin -->
+          <div class="p-2.5 rounded-xl bg-black/40 border border-yellow-500/30 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-yellow-400 text-black font-black flex items-center justify-center text-[10px]">1</span>
+              <div>
+                <span class="font-bold text-white">Jasur X.</span>
+                <span class="text-[10px] text-slate-400 block">Toshkent • 8-sinf</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="font-bold text-yellow-300">520🪙</span>
+              <span class="text-[9px] text-orange-400 font-bold block">🔥 14 kun</span>
+            </div>
+          </div>
+
+          <!-- 2-o'rin -->
+          <div class="p-2.5 rounded-xl bg-black/40 border border-slate-400/30 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-slate-300 text-black font-black flex items-center justify-center text-[10px]">2</span>
+              <div>
+                <span class="font-bold text-white">Madina S.</span>
+                <span class="text-[10px] text-slate-400 block">Samarqand • 7-sinf</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="font-bold text-slate-200">460🪙</span>
+              <span class="text-[9px] text-orange-400 font-bold block">🔥 10 kun</span>
+            </div>
+          </div>
+
+          <!-- 3-o'rin -->
+          <div class="p-2.5 rounded-xl bg-black/40 border border-amber-700/30 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-amber-600 text-black font-black flex items-center justify-center text-[10px]">3</span>
+              <div>
+                <span class="font-bold text-white">Ulug'bek R.</span>
+                <span class="text-[10px] text-slate-400 block">Buxoro • 7-sinf</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="font-bold text-amber-400">390🪙</span>
+              <span class="text-[9px] text-orange-400 font-bold block">🔥 8 kun</span>
+            </div>
+          </div>
+
+          <!-- Sizning o'rningiz -->
+          <div class="p-2.5 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-blue-500 text-white font-black flex items-center justify-center text-[10px]">Siz</span>
+              <span class="font-bold text-white" id="leaderboardYourName">Azizbek (Siz)</span>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] text-blue-300 font-bold">#14-o'rin</span>
+              <span class="text-[9px] text-emerald-400 font-bold block">Ko'tarilmoqda ↗</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -446,7 +426,7 @@
     <!-- 2. TAB: AI TYUTOR LAB -->
     <section id="content-ai-lab" class="space-y-3.5 hidden">
       <div style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-3 border backdrop-blur-xl flex items-center justify-between text-xs">
-        <span class="text-slate-300 font-semibold flex items-center gap-1.5">
+        <span class="text-slate-200 font-bold flex items-center gap-1.5">
           <span>🧠</span> Ta'lim Rejimi:
         </span>
         <div class="flex gap-1 bg-black/40 p-1 rounded-xl">
@@ -460,11 +440,11 @@
       </div>
 
       <div style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-3.5 border backdrop-blur-xl flex flex-col h-[340px]">
-        <div id="chatMessages" class="flex-1 overflow-y-auto space-y-2.5 pr-1 text-xs">
+        <div id="chatMessages" class="flex-1 overflow-y-auto space-y-2.5 pr-1 text-xs sm:text-sm">
           <div class="flex gap-2.5 items-start">
-            <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" class="w-7 h-7 rounded-xl text-white font-extrabold flex items-center justify-center text-xs shadow-md shrink-0">AI</div>
-            <div style="background: rgba(0,0,0,0.4); border-color: var(--border-card);" class="border rounded-2xl p-3 text-slate-200 leading-relaxed max-w-[85%]">
-              Salom, <span class="profileNameInline font-bold" style="color: var(--text-highlight);">O'quvchi</span>! 👋 Men sening shaxsiy matematika repetitoringman. Qaysi mavzuda savoling bor? Masalani rasmga olib yuborishing yoki to'g'ridan-to'g'ri so'rashing mumkin!
+            <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" class="w-7 h-7 rounded-xl text-white font-black flex items-center justify-center text-xs shadow-md shrink-0">AI</div>
+            <div style="background: rgba(0,0,0,0.5); border-color: var(--border-card);" class="border rounded-2xl p-3 text-slate-200 leading-relaxed max-w-[85%]">
+              Salom, <span class="profileNameInline font-bold" style="color: var(--text-highlight);">Azizbek</span>! 👋 Men sening matematika bo'yicha shaxsiy repetitoringman. Qaysi mavzuda savoling bor? Daftaringdagi masalani kameraga olsang ham birgalikda yechamiz!
             </div>
           </div>
         </div>
@@ -488,34 +468,34 @@
           <h2 class="text-sm font-bold text-white flex items-center gap-1.5">
             <span>📚</span> Darsliklar & Resurslar
           </h2>
-          <p class="text-[11px] text-slate-400">Rasmiy maktab darsliklari, formulalar va DTM to'plamlari</p>
+          <p class="text-[11px] text-slate-300">Rasmiy maktab darsliklari, formulalar va DTM to'plamlari</p>
         </div>
-        <span style="background: var(--bg-card-surface); border-color: var(--border-card); color: var(--text-highlight);" class="text-[10px] px-2 py-0.5 rounded-full border">DTS Standart</span>
+        <span style="background: var(--bg-card-surface); border-color: var(--border-card); color: var(--text-highlight);" class="text-[10px] px-2 py-0.5 rounded-full border font-bold">DTS Standart</span>
       </div>
 
       <div class="grid grid-cols-2 gap-2.5 text-xs">
         <div onclick="showResourceDetail('formulas')" style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-3.5 border hover:border-white/40 cursor-pointer active:scale-95 transition-all space-y-1.5 backdrop-blur-xl">
-          <div style="background: rgba(255,255,255,0.08); color: var(--text-highlight);" class="w-8 h-8 rounded-xl flex items-center justify-center text-base">📐</div>
+          <div style="background: rgba(255,255,255,0.1); color: var(--text-highlight);" class="w-8 h-8 rounded-xl flex items-center justify-center text-base">📐</div>
           <div class="font-bold text-white">Formulalar Jamlanmasi</div>
-          <p class="text-[10px] text-slate-400">Algebra, geometriya va trigonometriya formulalari</p>
+          <p class="text-[10px] text-slate-300">Algebra, geometriya va trigonometriya formulalari</p>
         </div>
 
         <div onclick="showResourceDetail('textbooks')" style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-3.5 border hover:border-white/40 cursor-pointer active:scale-95 transition-all space-y-1.5 backdrop-blur-xl">
-          <div style="background: rgba(255,255,255,0.08); color: var(--text-highlight);" class="w-8 h-8 rounded-xl flex items-center justify-center text-base">📖</div>
+          <div style="background: rgba(255,255,255,0.1); color: var(--text-highlight);" class="w-8 h-8 rounded-xl flex items-center justify-center text-base">📖</div>
           <div class="font-bold text-white">5–11 Sinf Darsliklari</div>
-          <p class="text-[10px] text-slate-400">O'zbekiston maktab darsliklarining elektron PDF nusxalari</p>
+          <p class="text-[10px] text-slate-300">O'zbekiston maktab darsliklarining elektron nusxalari</p>
         </div>
 
         <div onclick="showResourceDetail('dtm')" style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-3.5 border hover:border-white/40 cursor-pointer active:scale-95 transition-all space-y-1.5 backdrop-blur-xl">
-          <div style="background: rgba(255,255,255,0.08); color: var(--text-highlight);" class="w-8 h-8 rounded-xl flex items-center justify-center text-base">🎯</div>
+          <div style="background: rgba(255,255,255,0.1); color: var(--text-highlight);" class="w-8 h-8 rounded-xl flex items-center justify-center text-base">🎯</div>
           <div class="font-bold text-white">DTM & Milliy Sertifikat</div>
-          <p class="text-[10px] text-slate-400">Haqiqiy imtihon variantlari va bosqichma-bosqich yechimlar</p>
+          <p class="text-[10px] text-slate-300">Haqiqiy imtihon variantlari va bosqichma-bosqich yechimlar</p>
         </div>
 
         <div onclick="showResourceDetail('audio_lectures')" style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-3.5 border hover:border-white/40 cursor-pointer active:scale-95 transition-all space-y-1.5 backdrop-blur-xl">
-          <div style="background: rgba(255,255,255,0.08); color: var(--text-highlight);" class="w-8 h-8 rounded-xl flex items-center justify-center text-base">🎧</div>
+          <div style="background: rgba(255,255,255,0.1); color: var(--text-highlight);" class="w-8 h-8 rounded-xl flex items-center justify-center text-base">🎧</div>
           <div class="font-bold text-white">Audio Tushuntirishlar</div>
-          <p class="text-[10px] text-slate-400">Mavzular bo'yicha 3-5 daqiqali audio konspektlar</p>
+          <p class="text-[10px] text-slate-300">Mavzular bo'yicha 3-5 daqiqali audio konspektlar</p>
         </div>
       </div>
 
@@ -523,18 +503,18 @@
         <div class="flex justify-between items-center text-slate-200 font-bold">
           <span id="resourceTitle">📐 Asosiy Matematika Formulalari</span>
         </div>
-        <div class="space-y-1.5 text-[11px] text-slate-300 font-mono" id="resourceList">
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center">
+        <div class="space-y-1.5 text-xs text-slate-200 font-mono" id="resourceList">
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center">
             <span>• (a + b)² = a² + 2ab + b²</span>
-            <button onclick="copyFormula('(a + b)² = a² + 2ab + b²')" style="color: var(--accent-light);" class="hover:text-white">Nusxa</button>
+            <button onclick="copyFormula('(a + b)² = a² + 2ab + b²')" style="color: var(--text-highlight);" class="font-bold">Nusxa</button>
           </div>
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center">
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center">
             <span>• a² - b² = (a - b)(a + b)</span>
-            <button onclick="copyFormula('a² - b² = (a - b)(a + b)')" style="color: var(--accent-light);" class="hover:text-white">Nusxa</button>
+            <button onclick="copyFormula('a² - b² = (a - b)(a + b)')" style="color: var(--text-highlight);" class="font-bold">Nusxa</button>
           </div>
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center">
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center">
             <span>• Diskriminant: D = b² - 4ac</span>
-            <button onclick="copyFormula('D = b² - 4ac')" style="color: var(--accent-light);" class="hover:text-white">Nusxa</button>
+            <button onclick="copyFormula('D = b² - 4ac')" style="color: var(--text-highlight);" class="font-bold">Nusxa</button>
           </div>
         </div>
       </div>
@@ -543,16 +523,16 @@
     <!-- 4. TAB: O'YINLAR VA BAXSLAR (DUEL & RANDOM MATCHMAKER) -->
     <section id="content-games" class="space-y-3.5 hidden">
       
-      <!-- MODE 1: Tasodifiy Raqib bilan Bellashuv (Barat Academy uslubidagi Random Match) -->
+      <!-- MODE 1: Tasodifiy Raqib bilan Bellashuv -->
       <div style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-4 border space-y-2.5 shadow-xl relative overflow-hidden backdrop-blur-xl">
         <div class="flex justify-between items-center">
           <span class="text-xs font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-indigo-300 flex items-center gap-1.5 uppercase tracking-wider">
             <span>🎯</span> Tasodifiy Raqib bilan Bellashuv
           </span>
-          <span style="background: rgba(255,255,255,0.08); border-color: var(--border-card); color: var(--text-highlight);" class="text-[10px] px-2.5 py-0.5 rounded-full font-bold border">ONLINE REYTINQ</span>
+          <span style="background: rgba(255,255,255,0.1); border-color: var(--border-card); color: var(--text-highlight);" class="text-[10px] px-2.5 py-0.5 rounded-full font-bold border">ONLINE REYTINQ</span>
         </div>
-        <p class="text-[11px] text-slate-300">Butun O'zbekiston bo'ylab onlayn o'quvchilar bilan bellashing! Barat Academy uslubidagi tasodifiy matchmaking orqali darajangizga mos raqib topiladi.</p>
-        <button onclick="startRandomMatchmaking()" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" class="w-full py-3 rounded-2xl text-white font-extrabold text-xs shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all">
+        <p class="text-xs text-slate-300">Butun O'zbekiston bo'ylab onlayn o'quvchilar bilan bellashing! Barat Academy uslubidagi tasodifiy matchmaking orqali darajangizga mos raqib topiladi.</p>
+        <button onclick="startRandomMatchmaking()" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" class="w-full py-3 rounded-2xl text-white font-black text-xs shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all">
           <span>⚡</span> Tasodifiy Raqib Qidirish (Random Duel)
         </button>
       </div>
@@ -565,13 +545,13 @@
           </span>
           <span class="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-full font-bold">1v1 JANG</span>
         </div>
-        <p class="text-[11px] text-slate-300">Do'stingizga Telegram orqali havola yuboring. Kim ko'p to'g'ri hisoblasa, g'olib bo'ladi va +50🪙 oladi!</p>
+        <p class="text-xs text-slate-300">Do'stingizga Telegram orqali havola yuboring. Kim ko'p to'g'ri hisoblasa, g'olib bo'ladi va +50🪙 oladi!</p>
         <button onclick="inviteDuelTelegram()" class="w-full py-2.5 rounded-2xl bg-gradient-to-r from-rose-500 to-amber-500 text-white font-extrabold text-xs shadow-md active:scale-95 transition-all">
           🚀 Do'stni jangga chaqirish
         </button>
       </div>
 
-      <!-- MODE 3: 60 Soniya Tezkor Hisob (Speed Math) -->
+      <!-- MODE 3: 60 Soniya Tezkor Hisob -->
       <div style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-4 border space-y-3 backdrop-blur-xl">
         <div class="flex justify-between items-center text-xs">
           <span class="font-bold text-white flex items-center gap-1.5">
@@ -580,7 +560,7 @@
           <span class="text-amber-400 font-mono font-bold bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20" id="quizTimerDisplay">Vaqt: 60s</span>
         </div>
         <div class="bg-black/50 p-4 rounded-2xl text-center border border-white/5 space-y-2">
-          <div class="text-[11px] text-slate-400">Misolni hisoblang:</div>
+          <div class="text-xs text-slate-300">Misolni hisoblang:</div>
           <div id="quizExpression" style="color: var(--text-highlight);" class="text-2xl font-black font-mono">
             15 × 6 - 25 = ?
           </div>
@@ -596,8 +576,8 @@
   </main>
 
   <!-- ==================== YAGONA PASTKI MENYU ==================== -->
-  <footer style="background-color: var(--header-bg); border-color: var(--border-card);" class="sticky bottom-0 z-40 backdrop-blur-xl border-t p-2 flex items-center justify-around text-[10px] font-semibold text-slate-400 transition-colors">
-    <button onclick="switchTab('tutor')" id="nav-tutor" style="color: var(--accent-light);" class="flex flex-col items-center gap-1 font-bold transition-all">
+  <footer style="background-color: var(--header-bg); border-color: var(--border-card);" class="sticky bottom-0 z-40 backdrop-blur-xl border-t p-2 flex items-center justify-around text-[10px] font-bold text-slate-400 transition-colors">
+    <button onclick="switchTab('tutor')" id="nav-tutor" style="color: var(--accent-light);" class="flex flex-col items-center gap-1 transition-all">
       <span class="text-base">📸</span>
       <span>Doska</span>
     </button>
@@ -629,9 +609,7 @@
 
       <p class="text-xs text-slate-300">Har bir palitra o‘zining maxsus neon nurlari (spotlight) va rang uyg‘unligiga ega:</p>
 
-      <!-- 5 Ta Palitra Kartochkasi (Rasmga o'xshash pill ko'rinishida) -->
       <div class="space-y-2 text-xs">
-        
         <!-- 1. Deep Blue -->
         <div onclick="setThemePalette('theme-blue'); closeThemePickerModal();" class="p-3 rounded-2xl bg-[#000521] border border-[#2078CF]/50 flex items-center justify-between cursor-pointer hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
           <div class="flex items-center gap-2.5">
@@ -711,9 +689,7 @@
           </div>
           <span class="text-purple-400 text-xs font-bold">Tanlash ➔</span>
         </div>
-
       </div>
-
     </div>
   </div>
 
@@ -739,10 +715,9 @@
           <p class="text-xs text-slate-300">Ismingiz va profilingiz uchun rasm tanlang:</p>
         </div>
 
-        <!-- Avatar Ko'rinishi va Galereyadan Rasm Yuklash -->
         <div class="flex flex-col items-center gap-2">
           <div class="relative group">
-            <div id="modalAvatarPreview" style="box-shadow: 0 0 20px var(--spotlight-glow);" class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center text-2xl font-bold text-white overflow-hidden border-2 border-white/30">
+            <div id="modalAvatarPreview" style="box-shadow: 0 0 20px var(--spotlight-glow);" class="w-16 h-16 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center text-2xl font-bold text-white overflow-hidden border-2 border-white/40">
               <span id="modalAvatarEmojiPreview">🎓</span>
               <img id="modalAvatarImgPreview" src="" alt="Avatar" class="w-full h-full object-cover hidden">
             </div>
@@ -752,15 +727,14 @@
           </div>
           
           <input type="file" id="avatarFileInput" accept="image/*" class="hidden" onchange="handleCustomAvatarUpload(this)">
-          <button type="button" onclick="document.getElementById('avatarFileInput').click()" style="color: var(--text-highlight);" class="text-[11px] hover:underline font-semibold">
+          <button type="button" onclick="document.getElementById('avatarFileInput').click()" style="color: var(--text-highlight);" class="text-[11px] hover:underline font-bold">
             Galereyadan o'z rasmingizni yuklash
           </button>
         </div>
 
-        <!-- Ism Kiritish -->
         <div class="space-y-1">
           <label class="text-[11px] text-slate-300 font-semibold block">Ismingiz:</label>
-          <input type="text" id="obInputName" placeholder="Masalan: Azizbek" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+          <input type="text" id="obInputName" placeholder="Masalan: Azizbek" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-bold">
         </div>
 
         <button onclick="nextOnboardingStep(2)" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" class="w-full py-2.5 rounded-xl text-white font-bold text-xs shadow-lg active:scale-95 transition-all">
@@ -777,7 +751,7 @@
 
         <div class="space-y-2">
           <label class="text-[11px] text-slate-300 font-semibold block">Ta'lim muassasasi:</label>
-          <select id="obInputInstitution" onchange="handleObInstitutionChange(this.value)" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+          <select id="obInputInstitution" onchange="handleObInstitutionChange(this.value)" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
             <option value="school" selected>Umumta'lim Maktabi</option>
             <option value="lyceum">Akademik Litsey / Kollej</option>
             <option value="applicant">Abituriyent (DTM / Sertifikat)</option>
@@ -788,7 +762,7 @@
 
         <div class="space-y-2" id="obGradeContainer">
           <label class="text-[11px] text-slate-300 font-semibold block">Sinf / Bosqich:</label>
-          <select id="obInputGrade" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+          <select id="obInputGrade" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
             <option value="5">5-sinf</option>
             <option value="6">6-sinf</option>
             <option value="7" selected>7-sinf</option>
@@ -807,7 +781,7 @@
         </div>
       </div>
 
-      <!-- BOSQICH 3: Darajani aniqlash uchun elementar savollar (Mini-Test) -->
+      <!-- BOSQICH 3: Darajani aniqlash (Mini-Test) -->
       <div id="step-3" class="space-y-3 hidden">
         <div class="text-center space-y-1">
           <span class="text-xs bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-bold">Matematik Diagnostika</span>
@@ -840,7 +814,7 @@
             ⭐ O'rta Daraja
           </div>
         </div>
-        <p class="text-[11px] text-slate-400">Dasturdagi barcha masalalar va AI repetitor aynan sizning darajangizga moslashtirildi. Xush kelibsiz bonusi: +20🪙!</p>
+        <p class="text-[11px] text-slate-300">Dasturdagi barcha masalalar va AI repetitor aynan sizning darajangizga moslashtirildi. Xush kelibsiz bonusi: +20🪙!</p>
 
         <button onclick="finishOnboarding()" class="w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 text-black font-black text-xs shadow-lg active:scale-95 transition-all">
           Dasturni Boshlash 🚀
@@ -860,7 +834,6 @@
           <div style="border-color: var(--border-card);" class="absolute inset-0 rounded-full border-2"></div>
           <div style="border-color: var(--border-card);" class="absolute inset-2 rounded-full border"></div>
           <div style="border-color: var(--border-card);" class="absolute inset-5 rounded-full border"></div>
-          <!-- Radar Scanning Line -->
           <div style="background: linear-gradient(135deg, transparent, var(--spotlight-glow));" class="absolute inset-0 rounded-full radar-sweep"></div>
           <span class="text-3xl relative z-10 animate-pulse">🛰️</span>
         </div>
@@ -878,24 +851,21 @@
       <!-- Bosqich B: Raqib Topildi va Bellashuv -->
       <div id="duelActiveState" class="space-y-3.5 hidden">
         <div class="flex items-center justify-between border-b border-white/10 pb-2.5 text-xs">
-          <!-- Siz -->
           <div class="flex items-center gap-1.5">
             <span style="background: var(--primary-color);" class="w-6 h-6 rounded-lg text-white flex items-center justify-center text-[10px] font-bold">Siz</span>
             <span class="font-bold text-white" id="duelYourScore">0 ball</span>
           </div>
           <span class="text-[11px] text-amber-400 font-mono font-bold">VS</span>
-          <!-- Raqib -->
           <div class="flex items-center gap-1.5">
             <span class="font-bold text-rose-300" id="duelOpponentScore">0 ball</span>
             <span class="w-6 h-6 rounded-lg bg-rose-600 text-white flex items-center justify-center text-[10px] font-bold">Raqib</span>
           </div>
         </div>
 
-        <div class="text-center text-[11px] text-slate-300 font-semibold" id="duelOpponentName">
+        <div class="text-center text-[11px] text-slate-200 font-semibold" id="duelOpponentName">
           🎯 Raqib: Ulug'bek (Samarqand, 7-sinf)
         </div>
 
-        <!-- Savol Kartasi -->
         <div class="bg-black/50 p-4 rounded-2xl text-center border border-white/10 space-y-2">
           <div class="text-[10px] font-bold" style="color: var(--text-highlight);" id="duelRoundNumber">1-RAUND / 5</div>
           <div id="duelQuestionText" class="text-xl font-black text-yellow-300 font-mono">
@@ -937,7 +907,7 @@
       </div>
 
       <div class="space-y-2">
-        <label class="text-[11px] text-slate-300 block">Tenglama yoki masala matnini yozing:</label>
+        <label class="text-[11px] text-slate-300 block font-medium">Tenglama yoki masala matnini yozing:</label>
         <textarea id="manualProblemInput" rows="3" placeholder="Masalan: 4(x - 3) + 12 = 36 yoki x^2 - 16 = 0" class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 font-mono"></textarea>
       </div>
 
@@ -953,7 +923,7 @@
   <script>
     // Global Profil ob'ekti
     let userProfile = {
-      name: "O'quvchi",
+      name: "Azizbek",
       avatarEmoji: "🎓",
       avatarImg: "",
       institution: "school",
@@ -981,9 +951,71 @@
       } else {
         setTimeout(startOnboarding, 400);
       }
+
+      // 3. Jonli fon animatsiyasini ishga tushirish (Suzuvchi nurli pufakchalar & zarrachalar)
+      initBackgroundAnimation();
     });
 
-    // ==================== 5 RANG PALITRASINI O'RNATISH (@uiuxaadi) ====================
+    // ==================== JONLI FON ANIMATSIYASI (CANVAS PUFAKCHALAR & ZARRACHALAR) ====================
+    function initBackgroundAnimation() {
+      const canvas = document.getElementById('bgAnimationCanvas');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      // Pufakchalar to'plami
+      const bubbles = [];
+      const numBubbles = 28;
+      for (let i = 0; i < numBubbles; i++) {
+        bubbles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          radius: Math.random() * 6 + 2,
+          speedY: Math.random() * 0.4 + 0.15,
+          speedX: (Math.random() - 0.5) * 0.3,
+          alpha: Math.random() * 0.45 + 0.15,
+          pulse: Math.random() * 0.02 + 0.005
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        
+        // CSS dagi --bubble-color rgb qiymatini olish
+        const style = getComputedStyle(document.body);
+        const rgb = style.getPropertyValue('--bubble-color').trim() || '32, 120, 207';
+
+        bubbles.forEach(b => {
+          b.y -= b.speedY;
+          b.x += b.speedX;
+          b.alpha += Math.sin(Date.now() * b.pulse) * 0.005;
+
+          if (b.y < -20) {
+            b.y = h + 20;
+            b.x = Math.random() * w;
+          }
+          if (b.x < -20) b.x = w + 20;
+          if (b.x > w + 20) b.x = -20;
+
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${rgb}, ${Math.max(0.1, Math.min(0.7, b.alpha))})`;
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = `rgba(${rgb}, 0.8)`;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    // ==================== 5 RANG PALITRASINI O'RNATISH ====================
     function setThemePalette(themeName, save = true) {
       document.body.classList.remove('theme-blue', 'theme-indigo', 'theme-berry', 'theme-emerald', 'theme-violet');
       document.body.classList.add(themeName);
@@ -1020,6 +1052,7 @@
       document.getElementById('userLevelBadge').innerText = userProfile.skillLevel;
       document.getElementById('streakCount').innerText = userProfile.streak + '-kun';
       document.getElementById('coinsCount').innerText = userProfile.coins;
+      document.getElementById('leaderboardYourName').innerText = `${userProfile.name} (Siz)`;
       
       let instText = userProfile.grade + "-sinf • Maktab";
       if (userProfile.institution === 'applicant') instText = "Abituriyent • DTM";
@@ -1030,27 +1063,14 @@
     }
 
     // ==================== BOSQICHMA-BOSQICH ONBOARDING ====================
-
     let currentStep = 1;
     let diagnosticScore = 0;
     let currentDiagQuestionIdx = 0;
 
     const diagnosticQuestions = [
-      {
-        q: "14 - 3 × 4 = ?",
-        options: ["2", "44", "-2"],
-        correct: 0
-      },
-      {
-        q: "3x + 9 = 24  ⇒  x = ?",
-        options: ["3", "5", "7"],
-        correct: 1
-      },
-      {
-        q: "(x - 4)(x + 4) nimaga teng?",
-        options: ["x² - 8", "x² - 16", "x² + 16"],
-        correct: 1
-      }
+      { q: "14 - 3 × 4 = ?", options: ["2", "44", "-2"], correct: 0 },
+      { q: "3x + 9 = 24  ⇒  x = ?", options: ["3", "5", "7"], correct: 1 },
+      { q: "(x - 4)(x + 4) nimaga teng?", options: ["x² - 8", "x² - 16", "x² + 16"], correct: 1 }
     ];
 
     function startOnboarding() {
@@ -1078,7 +1098,7 @@
 
       if (step === 1) {
         document.getElementById('onboardingStepLabel').innerText = "1-QADAM: TANISHUV";
-        document.getElementById('obInputName').value = userProfile.name === "O'quvchi" ? "" : userProfile.name;
+        document.getElementById('obInputName').value = userProfile.name === "Azizbek" ? "Azizbek" : userProfile.name;
       } else if (step === 2) {
         document.getElementById('onboardingStepLabel').innerText = "2-QADAM: TA'LIM MASKANI";
       } else if (step === 3) {
@@ -1166,7 +1186,6 @@
     }
 
     // ==================== GALEREYA / KAMERA SKANERI & AI TAHLIL ====================
-
     function handleImageFile(input) {
       const file = input.files[0];
       if (!file) return;
@@ -1182,9 +1201,9 @@
       };
       reader.readAsDataURL(file);
 
-      statusText.innerHTML = '<span class="text-amber-400 animate-pulse">⏳ AI daftarni tahlil qilmoqda...</span>';
+      statusText.innerHTML = '<span class="text-amber-400 animate-pulse font-bold">⏳ AI daftarni tahlil qilmoqda...</span>';
       const eqTitle = document.getElementById('equationTitle');
-      eqTitle.innerHTML = '<span class="text-amber-300 animate-pulse font-sans">🔍 Rasm skanerlanmoqda va yechilmoqda...</span>';
+      eqTitle.innerHTML = '<span class="text-amber-300 animate-pulse font-sans">🔍 Masala skanerlanmoqda va yechilmoqda...</span>';
 
       const formData = new FormData();
       formData.append('file', file);
@@ -1251,7 +1270,6 @@
     }
 
     // ==================== BARAT ACADEMY USLUBIDAGI RANDOM MATCHMAKER ====================
-
     let duelTimer = null;
     let duelRound = 1;
     let yourDuelScore = 0;
@@ -1355,7 +1373,6 @@
     }
 
     // ==================== SPEED MATH (60 SONIYA) ====================
-
     function answerSpeedQuiz(isCorrect) {
       if (isCorrect) {
         addCoinReward(25);
@@ -1378,7 +1395,6 @@
     }
 
     // ==================== MASALANI QO'LDA O'ZGARTIRISH ====================
-
     function openEditProblemModal() {
       document.getElementById('manualProblemInput').value = document.getElementById('equationTitle').innerText.trim();
       document.getElementById('editProblemModal').classList.remove('hidden');
@@ -1439,7 +1455,6 @@
     }
 
     // ==================== OVOZLI REPETITOR (TTS) ====================
-
     let isAudioPlaying = false;
     let currentAudioScript = "Salom! Masalani birgalikda ko'rib chiqamiz. Birinchi bo'lib qavsni ochamiz, so'ng noma'lumni ajratamiz.";
 
@@ -1479,8 +1494,7 @@
       }
     }
 
-    // ==================== YAGONA NAVIGATSIYA & CHAT ====================
-
+    // ==================== NAVIGATSIYA & CHAT ====================
     function switchTab(tabId) {
       ['tutor', 'ai-lab', 'resources', 'games'].forEach(id => {
         document.getElementById('content-' + id).classList.add('hidden');
@@ -1544,7 +1558,7 @@
         container.innerHTML += `
           <div class="flex gap-2.5 items-start">
             <div style="background: var(--accent-color);" class="w-7 h-7 rounded-xl text-white font-extrabold flex items-center justify-center text-xs shrink-0">AI</div>
-            <div style="background: rgba(0,0,0,0.4); border-color: var(--border-card);" class="border rounded-2xl p-3 text-slate-200 max-w-[85%]">
+            <div style="background: rgba(0,0,0,0.5); border-color: var(--border-card);" class="border rounded-2xl p-3 text-slate-200 max-w-[85%]">
               ${data.reply}
             </div>
           </div>
@@ -1556,7 +1570,7 @@
           container.innerHTML += `
             <div class="flex gap-2.5 items-start">
               <div style="background: var(--accent-color);" class="w-7 h-7 rounded-xl text-white font-extrabold flex items-center justify-center text-xs shrink-0">AI</div>
-              <div style="background: rgba(0,0,0,0.4); border-color: var(--border-card);" class="border rounded-2xl p-3 text-slate-200 max-w-[85%]">
+              <div style="background: rgba(0,0,0,0.5); border-color: var(--border-card);" class="border rounded-2xl p-3 text-slate-200 max-w-[85%]">
                 💡 Ajoyib savol! ${userProfile.name}, bu qoidani tushunish uchun avval hadlarni qanday guruhlashimiz kerakligini eslaylik...
               </div>
             </div>
@@ -1576,25 +1590,25 @@
       if (type === 'formulas') {
         title.innerText = "📐 Asosiy Matematika Formulalari";
         list.innerHTML = `
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>• (a + b)² = a² + 2ab + b²</span><button onclick="copyFormula('(a + b)² = a² + 2ab + b²')" style="color: var(--text-highlight);">Nusxa</button></div>
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>• a² - b² = (a - b)(a + b)</span><button onclick="copyFormula('a² - b² = (a - b)(a + b)')" style="color: var(--text-highlight);">Nusxa</button></div>
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>• D = b² - 4ac</span><button onclick="copyFormula('D = b² - 4ac')" style="color: var(--text-highlight);">Nusxa</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center"><span>• (a + b)² = a² + 2ab + b²</span><button onclick="copyFormula('(a + b)² = a² + 2ab + b²')" style="color: var(--text-highlight);">Nusxa</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center"><span>• a² - b² = (a - b)(a + b)</span><button onclick="copyFormula('a² - b² = (a - b)(a + b)')" style="color: var(--text-highlight);">Nusxa</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center"><span>• D = b² - 4ac</span><button onclick="copyFormula('D = b² - 4ac')" style="color: var(--text-highlight);">Nusxa</button></div>
         `;
       } else if (type === 'textbooks') {
         title.innerText = "📖 Rasmiy Maktab Darsliklari (PDF)";
         list.innerHTML = `
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>📚 7-sinf Algebra (2024 nashri)</span><button onclick="alert('Darslik ochilmoqda...')" class="text-emerald-400">PDF Yuklash</button></div>
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>📚 8-sinf Geometriya (2024)</span><button onclick="alert('Darslik ochilmoqda...')" class="text-emerald-400">PDF Yuklash</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center"><span>📚 7-sinf Algebra (2024 nashri)</span><button onclick="alert('Darslik ochilmoqda...')" class="text-emerald-400">PDF Yuklash</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center"><span>📚 8-sinf Geometriya (2024)</span><button onclick="alert('Darslik ochilmoqda...')" class="text-emerald-400">PDF Yuklash</button></div>
         `;
       } else if (type === 'dtm') {
         title.innerText = "🎯 DTM & Milliy Sertifikat Testlari";
         list.innerHTML = `
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>📝 DTM-2025 Matematika 1-variant</span><button onclick="alert('Test ochilmoqda...')" class="text-amber-400">Yechish</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center"><span>📝 DTM-2025 Matematika 1-variant</span><button onclick="alert('Test ochilmoqda...')" class="text-amber-400">Yechish</button></div>
         `;
       } else {
         title.innerText = "🎧 5 Daqiqali Audio Konspektlar";
         list.innerHTML = `
-          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>🎙️ Logarifmlar mohiyati</span><button onclick="alert('Audio yangramoqda...')" style="color: var(--text-highlight);">Eshitish ▶</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center"><span>🎙️ Logarifmlar mohiyati</span><button onclick="alert('Audio yangramoqda...')" style="color: var(--text-highlight);">Eshitish ▶</button></div>
         `;
       }
     }
