@@ -1,11 +1,11 @@
 import os
 import sys
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-backend_dir = os.path.join(current_dir, "backend")
+root_dir = os.path.dirname(os.path.abspath(__file__))
+backend_dir = os.path.join(root_dir, "backend")
 
-if backend_dir not in sys.path:
-    sys.path.insert(0, backend_dir)
+for p in [root_dir, backend_dir]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
-import backend.main as backend_main
-app = backend_main.app
+from backend.main import app

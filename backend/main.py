@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, UploadFile, File, Form, HTTPException, Header, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel
 from typing import Optional, List
 import random
@@ -358,8 +358,31 @@ def serve_file(filename: str):
 
 # ===================== OMMAVIY ENDPOINTLAR (Mini App uchun) =====================
 
-@app.get("/")
-def root():
+# ===================== OMMAVIY SAHIFALAR (Mini App va Admin) =====================
+
+def _load_html(filename: str) -> str:
+    candidates = [
+        filename,
+        os.path.join("frontend", filename),
+        os.path.join(os.path.dirname(__file__), "..", "frontend", filename),
+        os.path.join(os.path.dirname(__file__), "..", filename),
+    ]
+    for p in candidates:
+        if os.path.exists(p):
+            with open(p, "r", encoding="utf-8") as f:
+                return f.read()
+    return f"<h1>Mathy: {filename} topilmadi</h1>"
+
+@app.get("/", response_class=HTMLResponse)
+def get_index():
+    return _load_html("index.html")
+
+@app.get("/admin.html", response_class=HTMLResponse)
+def get_admin():
+    return _load_html("admin.html")
+
+@app.get("/health")
+def health():
     return {"status": "ok", "service": "Mathy API v1.0"}
 
 
