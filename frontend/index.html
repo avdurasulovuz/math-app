@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mathy — AI Foto-Tyutor & Ta'lim Platformasi</title>
+  
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+
+  <style>
+    @keyframes waveBar {
+      0%, 100% { height: 4px; }
+      50% { height: 24px; }
+    }
+    .wave-bar { animation: waveBar 1.2s ease-in-out infinite; }
+    .wave-bar:nth-child(2) { animation-delay: 0.15s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+    .wave-bar:nth-child(5) { animation-delay: 0.2s; }
+    .wave-bar:nth-child(6) { animation-delay: 0.35s; }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.35); }
+      50% { box-shadow: 0 0 28px rgba(168, 85, 247, 0.65); }
+    }
+    .neon-glow { animation: pulse-glow 3s infinite ease-in-out; }
+
+    .chalk-board {
+      background: linear-gradient(145deg, #12281e 0%, #08150f 100%);
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 25px -5px rgba(0,0,0,0.5);
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 4px; }
+  </style>
+</head>
+<body class="bg-[#0B0D17] text-slate-100 antialiased p-0 m-0 font-sans select-none min-h-screen flex flex-col justify-between">
+
+  <!-- ==================== MINI APP HEADER ==================== -->
+  <header class="sticky top-0 z-50 bg-[#101322]/90 backdrop-blur-md border-b border-white/5 px-4 py-2.5">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="relative">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-extrabold text-base shadow-lg shadow-indigo-500/30">
+            A
+          </div>
+          <span class="absolute -bottom-1 -right-1 bg-emerald-500 text-[9px] text-black font-extrabold px-1 rounded-md border border-black">7-S</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h1 class="text-xs font-bold text-white tracking-wide" id="userName">Azizbek</h1>
+            <span class="text-[9px] bg-indigo-500/10 text-indigo-300 px-1.5 py-0.5 rounded-full font-bold border border-indigo-500/20">Level 4</span>
+          </div>
+          <div class="flex items-center gap-1 text-[10px] text-slate-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>Gemini 2.5 Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Streaks & Coins -->
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1 bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-amber-400 px-2.5 py-1 rounded-xl font-bold border border-amber-500/20 shadow-sm text-xs">
+          <span>🔥</span> <span id="streakCount">5 kun</span>
+        </div>
+        <div class="flex items-center gap-1 bg-indigo-500/10 text-indigo-300 px-2.5 py-1 rounded-xl font-bold border border-indigo-500/30 shadow-sm text-xs">
+          <span>🪙</span> <span id="coinsCount">520</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== NAV TABS ==================== -->
+  <nav class="bg-[#0B0D17] px-3 py-2 border-b border-white/5 flex gap-1 text-xs font-semibold">
+    <button onclick="switchTab('tutor')" id="tab-tutor" class="flex-1 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-600/30 transition-all flex items-center justify-center gap-1.5">
+      <span>📸</span> Doska
+    </button>
+    <button onclick="switchTab('ai-lab')" id="tab-ai-lab" class="flex-1 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center justify-center gap-1.5">
+      <span>🧠</span> AI Tyutor
+    </button>
+    <button onclick="switchTab('resources')" id="tab-resources" class="flex-1 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center justify-center gap-1.5">
+      <span>📚</span> Resurslar
+    </button>
+    <button onclick="switchTab('games')" id="tab-games" class="flex-1 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center justify-center gap-1.5">
+      <span>⚔️</span> O'yinlar
+    </button>
+  </nav>
+
+  <!-- ==================== ASOSIY KONTENT HUDUDI ==================== -->
+  <main class="flex-1 max-w-md mx-auto w-full p-4 space-y-4">
+
+    <!-- 1. TAB: SKANER & DOSKA -->
+    <section id="content-tutor" class="space-y-3.5">
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-950/60 via-purple-950/40 to-[#0F1222] p-4 border border-indigo-500/30 neon-glow">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span> Foto-Tyutor
+          </span>
+          <span class="text-[10px] bg-white/5 text-slate-300 px-2 py-0.5 rounded-full border border-white/10">DTM & Darslik</span>
+        </div>
+        <div class="flex gap-2.5">
+          <button onclick="triggerScan()" class="flex-1 py-3 px-3 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white font-extrabold text-xs shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 active:scale-95 transition-all">
+            <span class="text-base">📸</span> Daftarni Skanerlash
+          </button>
+          <input type="file" id="fileUpload" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+          <button onclick="document.getElementById('fileUpload').click()" class="py-3 px-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 text-xs font-semibold transition-all">
+            🖼️ Galereya
+          </button>
+        </div>
+      </div>
+
+      <!-- Qora Doska -->
+      <div class="chalk-board rounded-3xl p-4 border border-emerald-500/20 space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-emerald-500/20 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="text-base">📐</span>
+            <span class="text-emerald-300 font-bold font-mono">Algebra • 7-Sinf Masalasi</span>
+          </div>
+          <span class="text-[10px] text-emerald-400/80 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/30 font-mono">Tanildi ✓</span>
+        </div>
+
+        <div id="equationTitle" class="text-emerald-100 font-extrabold text-base font-mono tracking-wide">
+          3(2x - 5) + 7 = 28
+        </div>
+
+        <!-- Ochilib-yopiladigan Bosqichlar -->
+        <div class="space-y-2 text-xs font-mono">
+          <div class="rounded-xl bg-black/40 border border-emerald-500/20 overflow-hidden">
+            <button onclick="toggleAccordion('step1-body', 'step1-arrow')" class="w-full p-2.5 flex items-center justify-between text-left hover:bg-emerald-950/30">
+              <span class="text-emerald-300 font-bold flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] flex items-center justify-center">1</span>
+                Qavsni ochish va sonlarni guruhlash
+              </span>
+              <span id="step1-arrow" class="text-emerald-400 text-xs">▼</span>
+            </button>
+            <div id="step1-body" class="p-2.5 pt-0 text-[11px] text-emerald-200/90 border-t border-emerald-500/10 space-y-1">
+              <div>3 ni har bir hadga ko'paytiramiz: 3·2x - 3·5 + 7 = 28</div>
+              <div class="text-yellow-300 font-bold pl-2">➔ 6x - 15 + 7 = 28  ➔  6x - 8 = 28</div>
+            </div>
+          </div>
+
+          <div class="rounded-xl bg-black/40 border border-emerald-500/20 overflow-hidden">
+            <button onclick="toggleAccordion('step2-body', 'step2-arrow')" class="w-full p-2.5 flex items-center justify-between text-left hover:bg-emerald-950/30">
+              <span class="text-emerald-300 font-bold flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] flex items-center justify-center">2</span>
+                Noma'lum x ning qiymatini topish
+              </span>
+              <span id="step2-arrow" class="text-emerald-400 text-xs">▼</span>
+            </button>
+            <div id="step2-body" class="p-2.5 pt-0 text-[11px] text-emerald-200/90 border-t border-emerald-500/10 space-y-1">
+              <div>-8 ni o'ngga musbat qilib o'tkazamiz: 6x = 28 + 8 = 36</div>
+              <div class="text-yellow-300 font-bold pl-2">➔ x = 36 ÷ 6  👉 [ x = 6 ] 🎉</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audio Pleer -->
+        <div class="bg-black/60 rounded-2xl p-3 border border-emerald-500/30 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <button onclick="toggleAudio()" id="voicePlayBtn" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-400 to-teal-500 text-black font-extrabold flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all">
+              ▶
+            </button>
+            <div>
+              <div class="text-xs font-bold text-emerald-200">AI Ovozli Repetitor</div>
+              <div class="text-[10px] text-emerald-400/70" id="voiceStatus">Tinglash uchun bosing</div>
+            </div>
+          </div>
+          <div id="equalizer" class="flex items-center gap-1 h-6 px-2 opacity-40">
+            <div class="w-1 bg-emerald-400 rounded-full wave-bar"></div>
+            <div class="w-1 bg-emerald-400 rounded-full wave-bar"></div>
+            <div class="w-1 bg-emerald-400 rounded-full wave-bar"></div>
+            <div class="w-1 bg-emerald-400 rounded-full wave-bar"></div>
+            <div class="w-1 bg-emerald-400 rounded-full wave-bar"></div>
+            <div class="w-1 bg-emerald-400 rounded-full wave-bar"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <button onclick="openChatWithQuestion('Nega -15 ga 7 ni qo\'shganda -8 bo\'ldi?')" class="py-2 rounded-xl bg-emerald-900/50 hover:bg-emerald-900/80 border border-emerald-500/30 text-emerald-200 text-xs font-semibold flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>❓</span> "Nega bunday?"
+          </button>
+          <button onclick="addCoinReward(25)" class="py-2 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-black text-xs font-extrabold flex items-center justify-center gap-1 active:scale-95 transition-all">
+            <span>⚡</span> O'xshashini yech (+25🪙)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TAB: AI TYUTOR LAB -->
+    <section id="content-ai-lab" class="space-y-3.5 hidden">
+      <div class="bg-[#141829] p-2.5 rounded-2xl border border-indigo-500/20 flex items-center justify-between text-xs">
+        <span class="text-slate-300 font-semibold flex items-center gap-1.5">
+          <span>🧠</span> Ta'lim Rejimi:
+        </span>
+        <div class="flex gap-1 bg-black/40 p-1 rounded-xl">
+          <button onclick="setAiMode(this, 'socratic')" class="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-bold text-[10px]">
+            Sokratik (Yo'naltir)
+          </button>
+          <button onclick="setAiMode(this, 'direct')" class="px-2.5 py-1 rounded-lg text-slate-400 font-bold text-[10px] hover:text-white">
+            To'g'ridan-to'g'ri
+          </button>
+        </div>
+      </div>
+
+      <div class="rounded-3xl bg-[#12162B] border border-indigo-500/20 p-3.5 flex flex-col h-[320px]">
+        <div id="chatMessages" class="flex-1 overflow-y-auto space-y-2.5 pr-1 text-xs">
+          <div class="flex gap-2.5 items-start">
+            <div class="w-7 h-7 rounded-xl bg-gradient-to-tr from-cyan-400 to-indigo-600 flex items-center justify-center text-black font-extrabold text-xs shadow-md shrink-0">AI</div>
+            <div class="bg-indigo-950/50 border border-indigo-500/20 rounded-2xl p-3 text-slate-200 leading-relaxed max-w-[85%]">
+              Salom, Azizbek! 👋 Men sening matematika repetitoringman. Qaysi mavzuda qiynalyapsan? Formulani tushuntiraymi yoki daftaringdagi masalani?
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-2.5 mt-2 border-t border-white/10 flex items-center gap-2">
+          <input id="chatInput" type="text" placeholder="Savol yoki formulani yozing..." class="flex-1 bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+          <button onclick="sendMessage()" class="w-9 h-9 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center text-xs active:scale-95 transition-all">
+            ➤
+          </button>
+          <button onclick="simulateMic()" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 text-white flex items-center justify-center text-sm shadow-md active:scale-95 transition-all">
+            🎙️
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TAB: FANLAR RESURSLARI VA KUTUBXONA -->
+    <section id="content-resources" class="space-y-3.5 hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-sm font-bold text-white flex items-center gap-1.5">
+            <span>📚</span> Fanlar Resurslari & Darsliklar
+          </h2>
+          <p class="text-[11px] text-slate-400">Darsliklar, formulalar spravochnigi va DTM to'plamlari</p>
+        </div>
+        <span class="text-[10px] bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded-full border border-indigo-500/20">Rasmiy DTS</span>
+      </div>
+
+      <!-- Resurs toifalari -->
+      <div class="grid grid-cols-2 gap-2 text-xs">
+        
+        <!-- Formulalar Spravochnigi -->
+        <div onclick="showResourceDetail('formulas')" class="p-3 rounded-2xl bg-[#14182B] border border-indigo-500/20 hover:border-indigo-500/50 cursor-pointer active:scale-95 transition-all space-y-1.5">
+          <div class="w-8 h-8 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-base">
+            📐
+          </div>
+          <div class="font-bold text-white">Formulalar To'plami</div>
+          <p class="text-[10px] text-slate-400">Algebra, Geometriya, Trigonometriya bo'yicha barcha jadvallar</p>
+        </div>
+
+        <!-- Darsliklar PDF -->
+        <div onclick="showResourceDetail('textbooks')" class="p-3 rounded-2xl bg-[#14182B] border border-purple-500/20 hover:border-purple-500/50 cursor-pointer active:scale-95 transition-all space-y-1.5">
+          <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-base">
+            📖
+          </div>
+          <div class="font-bold text-white">1–11 Sinf Darsliklari</div>
+          <p class="text-[10px] text-slate-400">O'zbekiston maktab darsliklarining to'liq PDF nusxalari</p>
+        </div>
+
+        <!-- DTM & Milliy Sertifikat -->
+        <div onclick="showResourceDetail('dtm')" class="p-3 rounded-2xl bg-[#14182B] border border-amber-500/20 hover:border-amber-500/50 cursor-pointer active:scale-95 transition-all space-y-1.5">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-base">
+            🎯
+          </div>
+          <div class="font-bold text-white">DTM & Sertifikat</div>
+          <p class="text-[10px] text-slate-400">O'tgan yillardagi haqiqiy variantlar va yechimlar</p>
+        </div>
+
+        <!-- Audio Darslar & Layfxaklar -->
+        <div onclick="showResourceDetail('audio_lectures')" class="p-3 rounded-2xl bg-[#14182B] border border-emerald-500/20 hover:border-emerald-500/50 cursor-pointer active:scale-95 transition-all space-y-1.5">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-base">
+            🎧
+          </div>
+          <div class="font-bold text-white">Audio Konspektlar</div>
+          <p class="text-[10px] text-slate-400">5 daqiqali qisqa audio-tushuntirishlar va layfxaklar</p>
+        </div>
+
+      </div>
+
+      <!-- Resurs Tafsilotlari Paneli (Dinamik o'zgaradi) -->
+      <div id="resourceDetailBox" class="p-3.5 rounded-2xl bg-[#101426] border border-white/10 space-y-2 text-xs">
+        <div class="flex justify-between items-center text-slate-300 font-bold">
+          <span id="resourceTitle">📐 Algebra Formulalari (7–9 Sinf)</span>
+          <span class="text-[10px] text-indigo-400 cursor-pointer">Hammasini ko'rish</span>
+        </div>
+        <div class="space-y-1.5 text-[11px] text-slate-300 font-mono" id="resourceList">
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center">
+            <span>• (a + b)² = a² + 2ab + b²</span>
+            <button onclick="alert('📋 Formula nusxalandi!')" class="text-indigo-400 hover:text-white">Nusxa</button>
+          </div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center">
+            <span>• a² - b² = (a - b)(a + b)</span>
+            <button onclick="alert('📋 Formula nusxalandi!')" class="text-indigo-400 hover:text-white">Nusxa</button>
+          </div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center">
+            <span>• Diskriminant: D = b² - 4ac</span>
+            <button onclick="alert('📋 Formula nusxalandi!')" class="text-indigo-400 hover:text-white">Nusxa</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TAB: O'YINLAR VA BAXSLAR -->
+    <section id="content-games" class="space-y-3.5 hidden">
+      <div class="rounded-3xl bg-gradient-to-r from-red-950/60 via-orange-950/40 to-[#12162B] p-4 border border-rose-500/30 space-y-2.5">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-extrabold text-rose-300 flex items-center gap-1.5 uppercase">
+            <span>⚔️</span> 1v1 Telegram Jang
+          </span>
+          <span class="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-full font-bold">JONLI</span>
+        </div>
+        <p class="text-[11px] text-slate-300">Sinfdoshingizga Telegram orqali havola yuboring. Kim 60 soniyada 10 ta misolni xatosiz yechsa, 100🪙 yutadi!</p>
+        <button onclick="inviteDuelTelegram()" class="w-full py-2.5 rounded-2xl bg-gradient-to-r from-rose-500 to-amber-500 text-white font-extrabold text-xs shadow-lg active:scale-95 transition-all">
+          🚀 Sinfdosh bilan Duel boshlash
+        </button>
+      </div>
+
+      <!-- 60s Tezkor Hisob -->
+      <div class="rounded-3xl bg-[#12162B] border border-white/10 p-4 space-y-3">
+        <div class="flex justify-between items-center text-xs">
+          <span class="font-bold text-white flex items-center gap-1.5">
+            <span>⚡</span> 60s Tezkor Hisob
+          </span>
+          <span class="text-amber-400 font-mono font-bold bg-amber-500/10 px-2.5 py-0.5 rounded-full">Vaqt: 38s</span>
+        </div>
+        <div class="bg-black/50 p-4 rounded-2xl text-center border border-white/5 space-y-1.5">
+          <div class="text-[11px] text-slate-400">Misolni hisoblang:</div>
+          <div class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-300 font-mono">
+            15 × 6 - 25 = ?
+          </div>
+          <div class="grid grid-cols-3 gap-2.5 pt-2 text-xs font-bold">
+            <button onclick="answerQuiz(false)" class="py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10">60</button>
+            <button onclick="answerQuiz(true)" class="py-2.5 rounded-xl bg-white/5 hover:bg-emerald-500 hover:text-white border border-white/10">65</button>
+            <button onclick="answerQuiz(false)" class="py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10">75</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== PASTKI MENYU ==================== -->
+  <footer class="sticky bottom-0 z-50 bg-[#101322] border-t border-white/10 p-2 flex items-center justify-around text-[10px] font-semibold text-slate-400">
+    <button onclick="switchTab('tutor')" id="nav-tutor" class="flex flex-col items-center gap-1 text-indigo-400 font-bold">
+      <span class="text-base">📸</span>
+      <span>Doska</span>
+    </button>
+    <button onclick="switchTab('ai-lab')" id="nav-ai-lab" class="flex flex-col items-center gap-1 hover:text-white">
+      <span class="text-base">🧠</span>
+      <span>AI Tyutor</span>
+    </button>
+    <button onclick="switchTab('resources')" id="nav-resources" class="flex flex-col items-center gap-1 hover:text-white">
+      <span class="text-base">📚</span>
+      <span>Resurslar</span>
+    </button>
+    <button onclick="switchTab('games')" id="nav-games" class="flex flex-col items-center gap-1 hover:text-white">
+      <span class="text-base">⚔️</span>
+      <span>O'yinlar</span>
+    </button>
+  </footer>
+
+  <!-- SCRIPT LOGIKA -->
+  <script>
+    // Telegram WebApp Init
+    const tg = window.Telegram?.WebApp;
+    if (tg) {
+      tg.ready();
+      tg.expand();
+      if (tg.initDataUnsafe?.user?.first_name) {
+        document.getElementById('userName').innerText = tg.initDataUnsafe.user.first_name;
+      }
+    }
+
+    function switchTab(tabId) {
+      ['tutor', 'ai-lab', 'resources', 'games'].forEach(id => {
+        document.getElementById('content-' + id).classList.add('hidden');
+        document.getElementById('tab-' + id).className = "flex-1 py-2 rounded-xl text-slate-400 hover:text-white transition-all flex items-center justify-center gap-1.5";
+        document.getElementById('nav-' + id).className = "flex flex-col items-center gap-1 hover:text-white text-slate-400 transition-all";
+      });
+
+      document.getElementById('content-' + tabId).classList.remove('hidden');
+      document.getElementById('tab-' + tabId).className = "flex-1 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-600/30 transition-all flex items-center justify-center gap-1.5";
+      document.getElementById('nav-' + tabId).className = "flex flex-col items-center gap-1 text-indigo-400 font-bold transition-all";
+      
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+    }
+
+    function toggleAccordion(bodyId, arrowId) {
+      const b = document.getElementById(bodyId);
+      const a = document.getElementById(arrowId);
+      b.classList.toggle('hidden');
+      a.innerText = b.classList.contains('hidden') ? '▶' : '▼';
+    }
+
+    let isAudioPlaying = false;
+    function toggleAudio() {
+      isAudioPlaying = !isAudioPlaying;
+      const btn = document.getElementById('voicePlayBtn');
+      const eq = document.getElementById('equalizer');
+      const status = document.getElementById('voiceStatus');
+      if (isAudioPlaying) {
+        btn.innerText = '⏸';
+        eq.classList.replace('opacity-40', 'opacity-100');
+        status.innerText = "Tushuntirmoqda: 0:15 / 0:38";
+      } else {
+        btn.innerText = '▶';
+        eq.classList.replace('opacity-100', 'opacity-40');
+        status.innerText = "To'xtatildi";
+      }
+    }
+
+    function triggerScan() {
+      const eq = document.getElementById('equationTitle');
+      eq.innerHTML = '<span class="text-amber-300 animate-pulse">🔍 AI qo\'lyozmani o\'qimoqda...</span>';
+      setTimeout(() => {
+        eq.innerHTML = '4(x - 3) + 12 = 28';
+        alert("✨ Masala muvaffaqiyatli tanildi va doskaga yozildi!");
+      }, 900);
+    }
+
+    function addCoinReward(amount) {
+      const el = document.getElementById('coinsCount');
+      el.innerText = parseInt(el.innerText) + amount;
+      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+      alert(`🎉 Barakalla! Sizga +${amount}🪙 berildi!`);
+    }
+
+    function sendMessage() {
+      const inp = document.getElementById('chatInput');
+      const txt = inp.value.trim();
+      if (!txt) return;
+
+      const container = document.getElementById('chatMessages');
+      container.innerHTML += `<div class="flex gap-2 justify-end"><div class="bg-indigo-600 text-white rounded-2xl p-2.5 max-w-[80%]">${txt}</div></div>`;
+      inp.value = '';
+
+      setTimeout(() => {
+        container.innerHTML += `
+          <div class="flex gap-2.5 items-start">
+            <div class="w-7 h-7 rounded-xl bg-cyan-400 text-black font-extrabold flex items-center justify-center text-xs shrink-0">AI</div>
+            <div class="bg-indigo-950/50 border border-indigo-500/20 rounded-2xl p-3 text-slate-200 max-w-[85%]">
+              💡 Ajoyib savol! Matematikada bu qoida hadlarni guruhlash orqali oson hal qilinadi...
+            </div>
+          </div>
+        `;
+        container.scrollTop = container.scrollHeight;
+      }, 600);
+    }
+
+    function showResourceDetail(type) {
+      const title = document.getElementById('resourceTitle');
+      const list = document.getElementById('resourceList');
+      if (type === 'formulas') {
+        title.innerText = "📐 Asosiy Matematika Formulalari";
+        list.innerHTML = `
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>• (a + b)² = a² + 2ab + b²</span><button class="text-indigo-400">Nusxa</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>• a² - b² = (a - b)(a + b)</span><button class="text-indigo-400">Nusxa</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>• D = b² - 4ac</span><button class="text-indigo-400">Nusxa</button></div>
+        `;
+      } else if (type === 'textbooks') {
+        title.innerText = "📖 Rasmiy Maktab Darsliklari (PDF)";
+        list.innerHTML = `
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>📚 7-sinf Algebra (2024 nashri)</span><button onclick="alert('Yuklanmoqda...')" class="text-emerald-400">PDF Yuklash</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>📚 8-sinf Geometriya (2024)</span><button onclick="alert('Yuklanmoqda...')" class="text-emerald-400">PDF Yuklash</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>📚 9-sinf Algebra</span><button onclick="alert('Yuklanmoqda...')" class="text-emerald-400">PDF Yuklash</button></div>
+        `;
+      } else if (type === 'dtm') {
+        title.innerText = "🎯 DTM & Milliy Sertifikat Testlari";
+        list.innerHTML = `
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>📝 DTM-2025 Matematika 1-variant</span><button class="text-amber-400">Yechish</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>📝 Milliy Sertifikat darajali testlar</span><button class="text-amber-400">Yechish</button></div>
+        `;
+      } else {
+        title.innerText = "🎧 5 Daqiqali Audio Konspektlar";
+        list.innerHTML = `
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>🎙️ Logarifmlar mohiyati (4:20)</span><button class="text-cyan-400">Eshitish ▶</button></div>
+          <div class="p-2 rounded-xl bg-black/40 border border-white/5 flex justify-between items-center"><span>🎙️ Hosila nima degani? (5:10)</span><button class="text-cyan-400">Eshitish ▶</button></div>
+        `;
+      }
+    }
+
+    function inviteDuelTelegram() {
+      if (tg) {
+        tg.openTelegramLink("https://t.me/share/url?url=https://t.me/mathy_ai_bot?start=duel_9918&text=Men%20bilan%20matematika%20jangida%20kuch%20sinash!");
+      } else {
+        alert("⚔️ Duel havolasi nusxalandi: t.me/mathy_ai_bot?start=duel_9918");
+      }
+    }
+
+    function answerQuiz(isCorrect) {
+      if (isCorrect) {
+        addCoinReward(30);
+      } else {
+        alert("❌ Xato! Yana bir bor hisoblang.");
+      }
+    }
+  </script>
+</body>
+</html>
