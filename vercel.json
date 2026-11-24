@@ -1,7 +1,17 @@
 {
-  "rewrites": [
+  "cleanUrls": false,
+  "headers": [
     {
       "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "ALLOWALL" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
       "destination": "/api/index.py"
     }
   ]

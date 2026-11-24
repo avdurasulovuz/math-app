@@ -28,7 +28,10 @@ app.add_middleware(
 
 @app.on_event("startup")
 def on_startup():
-    init_db()
+    try:
+        init_db()
+    except Exception as e:
+        print("DB init note:", e)
 
 
 def get_db():
