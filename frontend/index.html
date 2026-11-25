@@ -153,6 +153,55 @@
       border-radius: 1.5rem;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    /* Custom styled selects */
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2393C5FD' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px !important;
+      background-color: var(--bg-card-surface) !important;
+      border: 1.5px solid var(--border-card) !important;
+      border-radius: 14px !important;
+      color: white !important;
+      font-weight: 600;
+      padding: 10px 36px 10px 14px !important;
+      font-size: 13px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    select:focus {
+      border-color: var(--accent-color) !important;
+      box-shadow: 0 0 0 3px rgba(var(--bubble-color), 0.25), 0 4px 12px rgba(0, 0, 0, 0.3);
+      outline: none;
+    }
+    select option {
+      background-color: #0a0e27;
+      color: white;
+      padding: 8px;
+    }
+
+    /* Yon panel (slide-out) */
+    .side-panel-overlay {
+      position: fixed; inset: 0; z-index: 50;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .side-panel-overlay.active { opacity: 1; pointer-events: all; }
+    .side-panel {
+      position: fixed; top: 0; right: -320px; z-index: 51;
+      width: 300px; max-width: 85vw; height: 100%;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-card);
+      transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+    }
+    .side-panel.active { right: 0; }
   </style>
 </head>
 <body class="text-slate-100 antialiased p-0 m-0 font-sans select-none min-h-screen flex flex-col justify-between relative overflow-x-hidden">
@@ -353,7 +402,10 @@
         </div>
       </div>
 
-      <!-- ==================== KUNLIK STATISTIKA & TOP REYTING ==================== -->
+    </section>
+
+    <!-- ==================== FOYDALANUVCHI REYTINGLARI (ALOHIDA BO'LIM) ==================== -->
+    <section id="content-rankings" class="space-y-3.5">
       <div style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-4 border backdrop-blur-xl space-y-3">
         <div class="flex items-center justify-between">
           <h3 class="text-xs sm:text-sm font-black text-white flex items-center gap-1.5">
@@ -421,6 +473,25 @@
           </div>
         </div>
       </div>
+
+      <!-- Foydalanuvchi Statistikasi -->
+      <div style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-4 border backdrop-blur-xl space-y-3">
+        <h3 class="text-xs font-bold text-white flex items-center gap-1.5">📊 Sizning Statistikangiz</h3>
+        <div class="grid grid-cols-3 gap-2 text-center text-xs">
+          <div class="bg-black/40 rounded-xl p-2.5 border border-white/10">
+            <div class="text-lg font-black" style="color: var(--accent-light);">12</div>
+            <div class="text-[10px] text-slate-400">Yechilgan</div>
+          </div>
+          <div class="bg-black/40 rounded-xl p-2.5 border border-white/10">
+            <div class="text-lg font-black text-emerald-400">85%</div>
+            <div class="text-[10px] text-slate-400">To'g'ri</div>
+          </div>
+          <div class="bg-black/40 rounded-xl p-2.5 border border-white/10">
+            <div class="text-lg font-black text-amber-400" id="statsStreak">1</div>
+            <div class="text-[10px] text-slate-400">Streak</div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- 2. TAB: AI TYUTOR LAB -->
@@ -473,7 +544,7 @@
         <span style="background: var(--bg-card-surface); border-color: var(--border-card); color: var(--text-highlight);" class="text-[10px] px-2 py-0.5 rounded-full border font-bold">DTS Standart</span>
       </div>
 
-      <div class="grid grid-cols-2 gap-2.5 text-xs">
+      <div id="resourceGridBox" class="grid grid-cols-2 gap-2.5 text-xs">
         <div onclick="showResourceDetail('formulas')" style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-3.5 border hover:border-white/40 cursor-pointer active:scale-95 transition-all space-y-1.5 backdrop-blur-xl">
           <div style="background: rgba(255,255,255,0.1); color: var(--text-highlight);" class="w-8 h-8 rounded-xl flex items-center justify-center text-base">📐</div>
           <div class="font-bold text-white">Formulalar Jamlanmasi</div>
@@ -499,9 +570,10 @@
         </div>
       </div>
 
-      <div id="resourceDetailBox" style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-3.5 border space-y-2 text-xs backdrop-blur-xl">
+      <div id="resourceDetailBox" style="background: var(--bg-card-surface); border-color: var(--border-card);" class="palette-pill p-3.5 border space-y-2 text-xs backdrop-blur-xl hidden">
         <div class="flex justify-between items-center text-slate-200 font-bold">
           <span id="resourceTitle">📐 Asosiy Matematika Formulalari</span>
+          <button onclick="backToResourceGrid()" style="color: var(--accent-light);" class="text-[11px] font-bold flex items-center gap-1 hover:underline">← Ortga</button>
         </div>
         <div class="space-y-1.5 text-xs text-slate-200 font-mono" id="resourceList">
           <div class="p-2 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center">
@@ -919,6 +991,94 @@
     </div>
   </div>
 
+  <!-- ==================== YON PANEL: PROFIL TAHRIRLASH & MAVZU ==================== -->
+  <div id="sidePanelOverlay" class="side-panel-overlay" onclick="closeSidePanel()"></div>
+  <div id="sidePanel" class="side-panel">
+    <div class="p-4 space-y-4">
+      
+      <!-- Panel header -->
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">⚙️ Profil & Sozlamalar</h3>
+        <button onclick="closeSidePanel()" class="text-slate-400 hover:text-white text-lg">✕</button>
+      </div>
+
+      <!-- Avatar + Ism -->
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <div id="sidePanelAvatar" style="box-shadow: 0 0 14px var(--spotlight-glow);" class="w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center text-white font-extrabold text-xl overflow-hidden border-2 border-white/40">
+            <span id="sidePanelAvatarEmoji">🎓</span>
+            <img id="sidePanelAvatarImg" src="" alt="Avatar" class="w-full h-full object-cover hidden">
+          </div>
+          <label for="sidePanelAvatarInput" style="background: var(--accent-color);" class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full text-white flex items-center justify-center text-xs cursor-pointer shadow-lg border border-white/20">📷</label>
+        </div>
+        <div class="flex-1">
+          <input type="text" id="sidePanelName" placeholder="Ismingiz" value="Azizbek" class="w-full bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-bold">
+        </div>
+      </div>
+      <input type="file" id="sidePanelAvatarInput" accept="image/*" class="hidden" onchange="handleSidePanelAvatar(this)">
+
+      <!-- Ta'lim muassasasi -->
+      <div class="space-y-1.5">
+        <label class="text-[11px] text-slate-400 font-semibold block">Ta'lim muassasasi:</label>
+        <select id="sidePanelInstitution" onchange="handleObInstitutionChange(this.value)">
+          <option value="school">Umumta'lim Maktabi</option>
+          <option value="lyceum">Akademik Litsey / Kollej</option>
+          <option value="applicant">Abituriyent (DTM)</option>
+          <option value="university">Universitet / Institut</option>
+          <option value="self">Mustaqil o'rganuvchi</option>
+        </select>
+      </div>
+
+      <div class="space-y-1.5" id="sidePanelGradeContainer">
+        <label class="text-[11px] text-slate-400 font-semibold block">Sinf / Bosqich:</label>
+        <select id="sidePanelGrade">
+          <option value="5">5-sinf</option>
+          <option value="6">6-sinf</option>
+          <option value="7" selected>7-sinf</option>
+          <option value="8">8-sinf</option>
+          <option value="9">9-sinf</option>
+          <option value="10">10-sinf</option>
+          <option value="11">11-sinf</option>
+        </select>
+      </div>
+
+      <button onclick="saveSidePanelProfile()" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);" class="w-full py-2.5 rounded-xl text-white font-bold text-xs shadow-lg active:scale-95 transition-all">
+        💾 Saqlash
+      </button>
+
+      <!-- Mavzu tanlash -->
+      <div class="border-t border-white/10 pt-3 space-y-2">
+        <h4 class="text-xs font-bold text-white flex items-center gap-1.5">🎨 Rang Palitrasi</h4>
+        
+        <div onclick="setThemePalette('theme-blue'); " class="p-2.5 rounded-xl bg-[#000521] border border-[#2078CF]/40 flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-95 transition-all text-xs">
+          <div class="flex -space-x-1"><span class="w-4 h-4 rounded-full bg-[#000521] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#0E4EB2] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#2078CF] border border-white/30"></span></div>
+          <span class="font-bold text-white">Kobalt Moviy</span>
+        </div>
+
+        <div onclick="setThemePalette('theme-indigo'); " class="p-2.5 rounded-xl bg-[#0B0F1A] border border-[#5046E5]/40 flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-95 transition-all text-xs">
+          <div class="flex -space-x-1"><span class="w-4 h-4 rounded-full bg-[#0B0F1A] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#5046E5] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#8B7CF6] border border-white/30"></span></div>
+          <span class="font-bold text-white">Indigo Siyohrang</span>
+        </div>
+
+        <div onclick="setThemePalette('theme-berry'); " class="p-2.5 rounded-xl bg-[#2D0A1E] border border-[#B94273]/40 flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-95 transition-all text-xs">
+          <div class="flex -space-x-1"><span class="w-4 h-4 rounded-full bg-[#2D0A1E] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#6A1E3B] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#B94273] border border-white/30"></span></div>
+          <span class="font-bold text-white">Qirmizi Yoqut</span>
+        </div>
+
+        <div onclick="setThemePalette('theme-emerald'); " class="p-2.5 rounded-xl bg-[#0F2A1D] border border-[#6B9071]/40 flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-95 transition-all text-xs">
+          <div class="flex -space-x-1"><span class="w-4 h-4 rounded-full bg-[#0F2A1D] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#375534] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#6B9071] border border-white/30"></span></div>
+          <span class="font-bold text-white">Zumrad Yashil</span>
+        </div>
+
+        <div onclick="setThemePalette('theme-violet'); " class="p-2.5 rounded-xl bg-[#00010D] border border-[#A305A6]/40 flex items-center gap-2.5 cursor-pointer hover:scale-[1.02] active:scale-95 transition-all text-xs">
+          <div class="flex -space-x-1"><span class="w-4 h-4 rounded-full bg-[#00010D] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#660273] border border-white/30"></span><span class="w-4 h-4 rounded-full bg-[#A305A6] border border-white/30"></span></div>
+          <span class="font-bold text-white">Neon Fiolet</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- SCRIPT LOGIKA -->
   <script>
     // Global Profil ob'ekti
@@ -1082,7 +1242,61 @@
     }
 
     function openProfileModal() {
-      startOnboarding();
+      // Yon panelni ochish (onboarding emas)
+      const panel = document.getElementById('sidePanel');
+      const overlay = document.getElementById('sidePanelOverlay');
+      panel.classList.add('active');
+      overlay.classList.add('active');
+      
+      // Profilni panelga yuklash
+      document.getElementById('sidePanelName').value = userProfile.name;
+      document.getElementById('sidePanelInstitution').value = userProfile.institution || 'school';
+      
+      const avatarImg = document.getElementById('sidePanelAvatarImg');
+      const avatarEmoji = document.getElementById('sidePanelAvatarEmoji');
+      if (userProfile.avatarImg) {
+        avatarImg.src = userProfile.avatarImg;
+        avatarImg.classList.remove('hidden');
+        avatarEmoji.classList.add('hidden');
+      } else {
+        avatarEmoji.innerText = userProfile.avatarEmoji || '🎓';
+        avatarEmoji.classList.remove('hidden');
+        avatarImg.classList.add('hidden');
+      }
+    }
+
+    function closeSidePanel() {
+      document.getElementById('sidePanel').classList.remove('active');
+      document.getElementById('sidePanelOverlay').classList.remove('active');
+    }
+
+    function handleSidePanelAvatar(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        userProfile.avatarImg = e.target.result;
+        const img = document.getElementById('sidePanelAvatarImg');
+        const emoji = document.getElementById('sidePanelAvatarEmoji');
+        img.src = e.target.result;
+        img.classList.remove('hidden');
+        emoji.classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveSidePanelProfile() {
+      const name = document.getElementById('sidePanelName').value.trim();
+      if (name) userProfile.name = name;
+      userProfile.institution = document.getElementById('sidePanelInstitution').value;
+      const gradeEl = document.getElementById('sidePanelGrade');
+      if (gradeEl && !document.getElementById('sidePanelGradeContainer').classList.contains('hidden')) {
+        userProfile.grade = parseInt(gradeEl.value) || 7;
+      }
+      
+      localStorage.setItem('mathy_user_profile', JSON.stringify(userProfile));
+      applyUserProfile();
+      closeSidePanel();
     }
 
     function nextOnboardingStep(step) {
@@ -1111,10 +1325,43 @@
 
     function handleObInstitutionChange(val) {
       const container = document.getElementById('obGradeContainer');
+      const gradeSelect = document.getElementById('obInputGrade');
+      const gradeLabel = container.querySelector('label');
+      
       if (val === 'applicant' || val === 'self') {
         container.classList.add('hidden');
       } else {
         container.classList.remove('hidden');
+        
+        if (val === 'university') {
+          gradeLabel.textContent = 'Kurs:';
+          gradeSelect.innerHTML = `
+            <option value="1">1-kurs</option>
+            <option value="2">2-kurs</option>
+            <option value="3">3-kurs</option>
+            <option value="4">4-kurs</option>
+            <option value="5">5-kurs (Magistratura)</option>
+            <option value="6">6-kurs (Magistratura)</option>
+          `;
+        } else if (val === 'lyceum') {
+          gradeLabel.textContent = 'Bosqich:';
+          gradeSelect.innerHTML = `
+            <option value="1">1-bosqich</option>
+            <option value="2">2-bosqich</option>
+            <option value="3">3-bosqich</option>
+          `;
+        } else {
+          gradeLabel.textContent = 'Sinf / Bosqich:';
+          gradeSelect.innerHTML = `
+            <option value="5">5-sinf</option>
+            <option value="6">6-sinf</option>
+            <option value="7" selected>7-sinf</option>
+            <option value="8">8-sinf</option>
+            <option value="9">9-sinf</option>
+            <option value="10">10-sinf</option>
+            <option value="11">11-sinf</option>
+          `;
+        }
       }
     }
 
@@ -1585,8 +1832,18 @@
     }
 
     function showResourceDetail(type) {
+      // Resurslar bo'limiga o'tish (agar boshqa tabda bo'lsa)
+      switchTab('resources');
+      
       const title = document.getElementById('resourceTitle');
       const list = document.getElementById('resourceList');
+      const detailBox = document.getElementById('resourceDetailBox');
+      const gridBox = document.getElementById('resourceGridBox');
+      
+      // Gridni yashirish va detail boxni ko'rsatish
+      if (gridBox) gridBox.classList.add('hidden');
+      detailBox.classList.remove('hidden');
+      
       if (type === 'formulas') {
         title.innerText = "📐 Asosiy Matematika Formulalari";
         list.innerHTML = `
@@ -1616,6 +1873,13 @@
     function copyFormula(f) {
       navigator.clipboard?.writeText(f);
       alert("📋 Formula nusxalandi: " + f);
+    }
+
+    function backToResourceGrid() {
+      const gridBox = document.getElementById('resourceGridBox');
+      const detailBox = document.getElementById('resourceDetailBox');
+      if (gridBox) gridBox.classList.remove('hidden');
+      if (detailBox) detailBox.classList.add('hidden');
     }
 
     function inviteDuelTelegram() {
